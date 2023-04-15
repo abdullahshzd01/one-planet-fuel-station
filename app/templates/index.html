@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>One Planet Fuel Station</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="/static/css/style.css">
+        <!-- <link rel="stylesheet" href="../templates/static/css/style.css"> -->
+
+        <style>
+            * {box-sizing: border-box;}
+            body {font-family: Verdana, sans-serif;}
+            .mySlides {display: none;}
+            .mySlides2 {display: none;}
+            img {vertical-align: middle;}
+
+            /* Slideshow container */
+            .slideshow-container {
+                max-width: 1000px;
+                position: relative;
+                margin: auto;
+            }
+
+            /* Caption text */
+            .text {
+                color: #f2f2f2;
+                font-size: 15px;
+                padding: 8px 12px;
+                position: absolute;
+                bottom: 8px;
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Number text (1/3 etc) */
+            .numbertext {
+                color: #f2f2f2;
+                font-size: 12px;
+                padding: 8px 12px;
+                position: absolute;
+                top: 0;
+            }
+
+            /* The dots/bullets/indicators */
+            .dot {
+                height: 15px;
+                width: 15px;
+                margin: 0 2px;
+                background-color: #bbb;
+                border-radius: 50%;
+                display: inline-block;
+                transition: background-color 0.6s ease;
+            }
+            .dot2 {
+                height: 15px;
+                width: 15px;
+                margin: 0 2px;
+                background-color: #bbb;
+                border-radius: 50%;
+                display: inline-block;
+                transition: background-color 0.6s ease;
+            }
+
+            .active {
+                background-color: #717171;
+            }
+
+            /* Fading animation */
+            .fade {
+                animation-name: fade;
+                animation-duration: 1.5s;
+            }
+
+            @keyframes fade {
+                from {opacity: .4} 
+                to {opacity: 1}
+            }
+
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 300px) {
+                .text {
+                    font-size: 11px
+                }
+            }
+        </style>
+
+        <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js" defer></script>
+
+        <!-- custom js file link  -->
+        <script src="/static/js/script.js" defer></script>
+    </head>
+
+    <body>
+        {% if checkOut %}
+            <script>alert("{{ message }}")</script>
+        {% endif %}
+
+        {% if apply %}
+            <script>alert("{{ message }}")</script>
+        {% endif %}
+
+        <!-- header section starts  -->
+        <header class="header">
+            <!-- <a href="/app/index/" class="logo"><img src="/static/image/logo.jpg" alt=""  width="60" height="60"/> One Planet Fuel Station </a> -->
+            <a href="/app/index/" class="logo"><img src="/static/image/logo.jpg" alt=""  width="60" height="60"/></a>
+            <a href="/app/index/" class="logo">One Planet Fuel Station</a>
+
+            <nav class="navbar">
+                <a href="/app/index/">Home</a>
+                <a href="/app/StationList/">Fuel-Station</a>
+                <!-- <a href="/app/Products/">Products</a> -->
+                <!-- <a href="/app/Reviews/">reviews</a> -->
+                <!-- <a href="/app/ContactUs/">Contact Us</a> -->
+                <a href="/app/AboutUs/">About Us</a>
+                <a href="/app/Careers/">Careers</a>
+                <a href="/app/LogIn/">LogIn/Register</a>
+                <a href="/app/myAdmin/">Admin</a>
+            </nav>
+        </header>
+        <!-- header section ends -->
+
+        <!-- home section starts  -->
+        <section class="home" id="home">
+
+            <div class="content">
+                <h3>Order from any <span>fuel</span> station</h3>
+                
+            </div>
+
+        </section>
+        <!-- home section ends -->
+
+        <!-- features section starts  -->
+        <section class="features" id="features">
+            <div class="box-container">
+                <div class="box">
+                    <img src="/static/image/12.jpg" alt="">
+                    <h3>Services</h3>
+                    <p>Fuel Station will accept the order and your product will be delivered.</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+
+                <div class="box">
+                    <img src="/static/image/feature-img-2.png" alt="">
+                    <h3>Fuel delivery</h3>
+                    <p>Delivery guy will deliver your product to your accurate location .</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+
+                <div class="box">
+                    <img src="/static/image/feature-img-3.png" alt="">
+                    <h3>easy payments</h3>
+                    <p>All payment methods available.</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+        </section>
+        <!-- features section ends -->
+
+        <!-- products section starts  -->
+        <section class="products" id="products">
+            <h1 class="heading"> Fuel <span>Stations</span> </h1>
+
+            <div class="swiper product-slider">
+                <div class="slideshow-container swiper-wrapper">
+                    {% for f in station_list %}
+                        <div class="mySlides2 fade swiper-slide" style="padding: 10px;">
+                            <div class="box">
+                                <!-- <img src="/static/image/F1.jpg" alt=""> -->
+                                <h3>{{ f.name }}</h3>
+
+                                <h2>{{ f.address }}</h2>
+                                
+                                <div class="price">{{ f.phone }}</div>
+                                <a href="/app/Products/{{ f.id }}/" class="btn">See Products</a>  
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <!-- <div class="mySlides2 fade swiper-slide" style="padding: 10px;">
+                        <div class="box">
+                            <img src="/static/image/F1.jpg" alt="">
+                            <h3>Havoline Luubricant Oil</h3>
+                            
+                            <div class="price"> Rs3000/- - Rs5000/- </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            <a href="/app/Products/" class="btn">add to cart</a>
+                        </div>
+                    </div>
+
+                    <div class="mySlides2 fade swiper-slide" style="padding: 10px;">
+                        <div class="box">
+                            <img src="/static/image/F2.jpg" alt="">
+                            <h3>Delo Fuel Oils</h3>
+                            <div class="price"> Rs3000/- - Rs5000/- </div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <a href="/app/Products/" class="btn">add to cart</a>
+                        </div>
+                    </div>
+
+                    <div class="mySlides2 fade swiper-slide" style="padding: 10px;">
+                        <div class="box">
+                            <img src="/static/image/F3.jpg" alt="">
+                            <h3>ZIC Oil</h3>
+                            <div class="price"> Rs3000/- - Rs5000/- </div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <a href="/app/Products/" class="btn">add to cart</a>
+                        </div>
+                    </div>
+
+                    <div class="mySlides2 fade swiper-slide" style="padding: 10px;">
+                        <div class="box">
+                            <img src="/static/image/F4.jpg" alt="">
+                            <h3>Total Oils</h3>
+                            <div class="price"> Rs3000/- - Rs5000/- </div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <a href="/app/Products/" class="btn">add to cart</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mySlides2 fade swiper-slide" style="padding: 10px;">
+                        <div class="box">
+                            <img src="/static/image/F5.jpg" alt="">
+                            <h3>Shell Oils</h3>
+                            <div class="price"> Rs3000/- - Rs5000/- </div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <a href="/app/Products/" class="btn">add to cart</a>
+                        </div>
+                    </div>
+
+                    <div class="mySlides2 fade swiper-slide" style="padding: 10px;" >
+                        <div class="box">
+                            <img src="/static/image/F6.jpg" alt="">
+                            <h3>PSO Oils</h3>
+                            <div class="price"> Rs3000/- - Rs5000/- </div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <a href="/app/Products/" class="btn">add to cart</a>
+                        </div>
+                    </div> -->
+                </div>
+
+                <br>
+                
+                <div style="text-align:center">
+                    {% for f in station_list %}
+                        <span class="dot2"></span> 
+                    {% endfor %}
+
+                        
+                    <!-- <span class="dot2"></span> 
+                    <span class="dot2"></span> 
+                    <span class="dot2"></span> 
+                    <span class="dot2"></span> 
+                    <span class="dot2"></span> 
+                    <span class="dot2"></span>  -->
+                </div>
+            </div>
+        </section>
+        <!-- products section ends -->
+
+        <!-- categories section starts  -->
+        <section class="categories" id="categories">
+
+            <h1 class="heading"> product <span>categories</span> </h1>
+
+            <div class="box-container">
+
+                <div class="box">
+                    <img src="/static/image/feature-img-2.png" alt="">
+                    <h3>Fuel Delivery</h3>
+                    
+                    <!-- <a href="/app/Products/" class="btn">shop now</a> -->
+                    <a href="#" class="btn">shop now</a>
+                </div>
+
+                <div class="box">
+                    <img src="/static/image/F1.jpg" alt="">
+                    <h3>Engine Oils</h3>
+                    
+                    <!-- <a href="/app/Products/" class="btn">shop now</a> -->
+                    <a href="#" class="btn">shop now</a>
+                </div>
+
+                <div class="box">
+                    <img src="/static/image/services.jpg" alt="">
+                    <h3>Vehicle-based Services</h3>
+                    
+                    <!-- <a href="/app/Products/" class="btn">shop now</a> -->
+                    <a href="#" class="btn">shop now</a>
+                </div>
+
+                <div class="box">
+                    <img src="/static/image/tow.jpg" alt="">
+                    <h3>Tow services</h3>
+                    <p>upto 45% off</p>
+                    <!-- <a href="/app/Products/" class="btn">shop now</a> -->
+                    <a href="#" class="btn">shop now</a>
+                </div>
+            </div>
+
+        </section>
+        <!-- categories section ends -->
+
+        <!-- review section starts  -->
+        <section class="review" id="review">
+            <h1 class="heading"> customer's <span>review</span> </h1>
+
+            <div class="swiper review-slider">
+                <div class="slideshow-container swiper-wrapper">
+                    <div class="mySlides fade swiper-slide box">
+                        <img src="/static/image/pic-1.png" alt="">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde sunt fugiat dolore ipsum id est maxime ad tempore quasi tenetur.</p>
+                        <h3>john deo</h3>
+                        
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="mySlides fade swiper-slide box">
+                        <img src="/static/image/pic-2.png" alt="">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde sunt fugiat dolore ipsum id est maxime ad tempore quasi tenetur.</p>
+                        <h3>john deo</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="mySlides fade swiper-slide box">
+                        <img src="/static/image/pic-3.png" alt="">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde sunt fugiat dolore ipsum id est maxime ad tempore quasi tenetur.</p>
+                        <h3>john deo</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="mySlides fade swiper-slide box">
+                        <img src="/static/image/pic-4.png" alt="">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde sunt fugiat dolore ipsum id est maxime ad tempore quasi tenetur.</p>
+                        <h3>john deo</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                
+                <div style="text-align:center">
+                    <span class="dot"></span> 
+                    <span class="dot"></span> 
+                    <span class="dot"></span> 
+                    <span class="dot"></span> 
+                </div>
+            </div>
+        </section>
+        <!-- review section ends -->
+
+        <script>
+            let slideIndex = 0;
+            let slideIndex2 = 0;
+            showSlides2();
+            showSlides();
+
+            function showSlides()
+            {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                let dots = document.getElementsByClassName("dot");
+
+                for (i = 0; i < slides.length; i++)
+                {
+                    slides[i].style.display = "none";  
+                }
+
+                slideIndex++;
+
+                if (slideIndex > slides.length)
+                {
+                    slideIndex = 1
+                }
+
+                for (i = 0; i < dots.length; i++)
+                {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+
+                slides[slideIndex-1].style.display = "block";  
+                dots[slideIndex-1].className += " active";
+                setTimeout(showSlides, 3000); // Change image every 3 seconds
+            }
+
+            function showSlides2()
+            {
+                let i;
+                let slides = document.getElementsByClassName("mySlides2");
+                let dots = document.getElementsByClassName("dot2");
+
+                for (i = 0; i < slides.length; i++)
+                {
+                    slides[i].style.display = "none";  
+                }
+
+                slideIndex2++;
+
+                if (slideIndex2 > slides.length)
+                {
+                    slideIndex2 = 1
+                }
+
+                for (i = 0; i < dots.length; i++)
+                {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+
+                slides[slideIndex2-1].style.display = "block";  
+                dots[slideIndex2-1].className += " active";
+                setTimeout(showSlides2, 4000); // Change image every 4 seconds
+            }
+        </script>
+
+        <!-- footer section starts  -->
+        <section class="footer">
+            <div class="box-container">
+                <div class="box">
+                    <h3> One Planet Fuel Station <i class="fas fa-shopping-basket"></i> </h3>
+                    <p>Order from any fuel station you want.</p>
+                    <div class="share">
+                        <a href="#" class="fab fa-facebook-f"></a>
+                        <a href="#" class="fab fa-twitter"></a>
+                        <a href="#" class="fab fa-instagram"></a>
+                        <a href="#" class="fab fa-linkedin"></a>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h3>contact info</h3>
+                    <a href="#" class="links"> <i class="fas fa-phone"></i> +92310-5021922 </a>
+                    <a href="#" class="links"> <i class="fas fa-phone"></i> +92304-8986303 </a>
+                    <a href="#" class="links"> <i class="fas fa-envelope"></i> hm2572394@gmail.com </a>
+                    <a href="#" class="links"> <i class="fas fa-envelope"></i> huzair9@gmail.com </a>
+                    <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan - 44000 </a>
+                </div>
+
+                <div class="box">
+                    <h3>quick links</h3>
+                    <a href="/app/index/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                    <a href="/app/StationList/" class="links"> <i class="fas fa-arrow-right"></i> Fuel-Station </a>
+                    <a href="/app/Products/" class="links"> <i class="fas fa-arrow-right"></i> Products </a>
+                    <a href="/app/Reviews/" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+                    <a href="/app/ContactUs/" class="links"> <i class="fas fa-arrow-right"></i> Contact us</a>
+                    <a href="/app/AboutUs/" class="links"> <i class="fas fa-arrow-right"></i> About Us </a>
+                    <a href="/app/Careers/" class="links"> <i class="fas fa-arrow-right"></i> Careers </a>
+                </div>
+            </div>
+
+            <div class="credit"> created by <span> UH Designers </span> | all rights reserved </div>
+        </section>
+        <!-- footer section ends -->
+    </body>
+</html>

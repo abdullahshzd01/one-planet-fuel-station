@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jobs F</title>
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    .header {
+      height: 9%
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #dfe9f5;
+    }
+
+    .wrapper {
+      width: 330px;
+      padding: 2rem 0 1rem 0;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #07001f;
+    }
+
+    p {
+      margin-bottom: 1.7rem;
+    }
+
+    form input {
+      width: 85%;
+      outline: none;
+      border: none;
+      background: #dfe9f5;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    .recover {
+      text-align: right;
+      font-size: 0.8rem;
+      margin: 0.2rem 1.7rem 0 0;
+    }
+
+    .recover a {
+      text-decoration: none;
+      color: #07001f;
+    }
+
+    button {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      padding: 8px 0;
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      width: 85%;
+      background: tomato;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: rgba(122, 30, 30, 0.767);
+    }
+
+    .or {
+      font-size: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+
+    .not-member {
+      font-size: 0.8rem;
+      margin-top: 1.4rem;
+    }
+
+    .not-member a {
+      color: tomato;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> One Planet Fuel Station </a>
+    <nav class="navbar">
+      <a href="/app/FuelStation/{{ station_id }}/">Dashboard</a>
+      <a href="/app/Post-A-Job/{{ station_id }}/">Post Jobs</a>
+      <a href="/app/AddProducts/{{ station_id }}/">Add Products</a>
+    </nav>
+  </div>
+  <br><br><br>
+
+  <div class="wrapper">
+    <h1>Post Job Details - {{ station.name }}</h1>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <input type="text" placeholder="Job Name" id="JobName" name="JobName">
+      <input type="text" placeholder="Designation" id="Designation" name="Designation">
+      <!-- <input type="text" placeholder="Enter Fuel Station Name" id="stnName" name="stnName"> -->
+      <!-- <input type="text" placeholder="Fuel Station Address" id="stnAddrs" name="stnAddrs"> -->
+      <!-- <input type="text" placeholder=" Phone Number" id="stnPhone" name="stnPhone"> -->
+      <label for="Station"></label>
+      <!-- <select name="stnName" id="stnName">
+        <option value="Station">Select Fuel Station</option>
+        {% for s in station_list %}
+          <option value="{{s.name}}">{{s.name}}</option>
+        {% endfor %}
+      </select> -->
+      <input type="text" id="stnName" name="stnName" value="{{ station.name }}" hidden>
+      <input type="text" placeholder="Job Details" id="JobDetails" name="JobDetails">
+
+      <button type="submit">Post Job</button>
+    </form>
+  </div>
+
+  <section class="footer">
+    <div class="box-container">
+      <div class="box">
+        <h3> One Planet Fuel Station <i class="fas fa-shopping-basket"></i> </h3>
+        <p>Order from any fuel station you want.</p>
+        <div class="share">
+          <a href="#" class="fab fa-facebook-f"></a>
+          <a href="#" class="fab fa-twitter"></a>
+          <a href="#" class="fab fa-instagram"></a>
+          <a href="#" class="fab fa-linkedin"></a>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3>contact info</h3>
+        <a href="#" class="links"> <i class="fas fa-phone"></i> +92310-5021922 </a>
+        <a href="#" class="links"> <i class="fas fa-phone"></i> +923048986303 </a>
+        <a href="#" class="links"> <i class="fas fa-envelope"></i> hm2572394@gmail.com </a>
+        <a href="#" class="links"> <i class="fas fa-envelope"></i> huzair9@gmail.com </a>
+        <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan - 44000 </a>
+      </div>
+
+      <div class="box">
+        <h3>quick links</h3>
+        <a href="http://127.0.0.1:5500/index.html" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+            <a href="http://127.0.0.1:5500/Login%20F.html" class="links"> <i class="fas fa-arrow-right"></i> Fuel-Station </a>
+            <a href="http://127.0.0.1:5500/Products.html" class="links"> <i class="fas fa-arrow-right"></i> Products </a>
+            <a href="http://127.0.0.1:5500/review%20us.html" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+            <a href="http://127.0.0.1:5500/Contact%20Us.html" class="links"> <i class="fas fa-arrow-right"></i> Contact us</a>
+            <a href="http://127.0.0.1:5500/About%20Us.html" class="links"> <i class="fas fa-arrow-right"></i> About Us </a>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Careers </a>
+      </div>
+
+      <div class="box">
+        <h3>newsletter</h3>
+        <p>subscribe for latest updates</p>
+        <input type="email" placeholder="your email" class="email">
+        <input type="submit" value="subscribe" class="btn">
+        <img src="/static/image/payment.png" class="payment-img" alt="">
+      </div>
+    </div>
+
+    <div class="credit"> created by <span> UH Designers </span> | all rights reserved </div>
+
+  </section>
+</body>
+
+</html>

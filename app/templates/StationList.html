@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>One Planet Fuel Station</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="/static/css/style.css">
+        <!-- <link rel="stylesheet" href="../templates/static/css/style.css"> -->
+        <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js" defer></script>
+
+        <!-- custom js file link  -->
+        <script src="/static/js/script.js" defer></script>
+
+    </head>
+    
+    <body>
+        <!-- header section starts  -->
+        <header class="header">
+            <a href="/app/index/" class="logo"><img src="/static/image/logo.jpg" alt=""  width="60" height="60"/></a>
+            <a href="/app/index/" class="logo">One Planet Fuel Station</a>
+            <nav class="navbar">
+                <a href="/app/index/">Home</a>
+                <a href="/app/StationList/">Fuel-Station</a>
+                <a href="/app/AboutUs/">About Us</a>
+                <a href="/app/Careers/">Careers</a>
+                <a href="/app/LogIn/">LogIn/Register</a>
+            </nav>
+        </header>
+        <!-- header section ends -->
+
+        <!-- Careers body starts -->
+        <section  class="products" id="products">
+            <br><br><br><br><br>
+            <!-- <h2 style="align-content: center;">Find a Job that suits you and</h2> -->
+            <h1 class="heading"> Fuel <span>Stations</span> </h1>
+        
+            <div class="swiper product-slider">
+                <div class="">
+                    {% for f in station_list %}
+                    <div class="swiper-slide box">
+                        <h3>{{ f.name }}</h3>
+
+                        <h4>{{ f.address }}</h4>
+
+                        <p>{{ f.phone }}</p>
+
+                        <!-- <form action="/app/Products/{{ f.id }}/">
+                            {% csrf_token %}
+                            <input type="text" value="{{ f.id }}" name="Fid" hidden>
+                            <button class="btn" type="submit" name="seePrdcts">See Products</button>
+                        </form> -->
+
+                        <a href="/app/Products/{{ f.id }}/" class="btn">See Products</a>  
+                    </div>
+                    <br><br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <br><br><br><br><br>
+        </section>
+        <!-- Careers body ends -->
+
+        <!-- footer section starts  -->
+        <section class="footer">
+            <div class="box-container">
+                <div class="box">
+                    <h3> One Planet Fuel Station <i class="fas fa-shopping-basket"></i> </h3>
+                    <p>Order from any fuel station you want.</p>
+                    <div class="share">
+                        <a href="#" class="fab fa-facebook-f"></a>
+                        <a href="#" class="fab fa-twitter"></a>
+                        <a href="#" class="fab fa-instagram"></a>
+                        <a href="#" class="fab fa-linkedin"></a>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h3>contact info</h3>
+                    <a href="#" class="links"> <i class="fas fa-phone"></i> +92310-5021922 </a>
+                    <a href="#" class="links"> <i class="fas fa-phone"></i> +92304-8986303 </a>
+                    <a href="#" class="links"> <i class="fas fa-envelope"></i> hm2572394@gmail.com </a>
+                    <a href="#" class="links"> <i class="fas fa-envelope"></i> huzair9@gmail.com </a>
+                    <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan - 44000 </a>
+                </div>
+
+                <div class="box">
+                    <h3>quick links</h3>
+                    <a href="/app/index/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                    <a href="/app/StationList/" class="links"> <i class="fas fa-arrow-right"></i> Fuel-Station </a>
+                    <a href="/app/Products/" class="links"> <i class="fas fa-arrow-right"></i> Products </a>
+                    <a href="/app/Reviews/" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+                    <a href="/app/ContactUs/" class="links"> <i class="fas fa-arrow-right"></i> Contact us</a>
+                    <a href="/app/AboutUs/" class="links"> <i class="fas fa-arrow-right"></i> About Us </a>
+                    <a href="/app/Careers/" class="links"> <i class="fas fa-arrow-right"></i> Careers </a>
+                </div>
+            </div>
+
+            <div class="credit"> created by <span> UH Designers </span> | all rights reserved </div>
+        </section>
+        <!-- footer section ends -->
+    </body>
+</html>

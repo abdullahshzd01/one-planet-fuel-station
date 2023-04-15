@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>One Planet Fuel Station</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/demo2.min.css">
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Poppins", sans-serif;
+            }
+
+            body {
+                min-height: 100vh;
+                width: 100%;
+                background: #c8e8e9;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .container {
+                width: 85%;
+                background: #fff;
+                border-radius: 6px;
+                padding: 20px 60px 30px 40px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            .container .content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .container .content .left-side {
+                width: 25%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 15px;
+                position: relative;
+            }
+
+            .content .left-side::before {
+                content: '';
+                position: absolute;
+                height: 70%;
+                width: 2px;
+                right: -15px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: #afafb6;
+            }
+
+            .content .left-side .details {
+                margin: 14px;
+                text-align: center;
+            }
+
+            .content .left-side .details i {
+                font-size: 30px;
+                color: var(--orange);
+                margin-bottom: 10px;
+            }
+
+            .content .left-side .details .topic {
+                font-size: 18px;
+                font-weight: 500;
+            }
+
+            .content .left-side .details .text-one,
+            .content .left-side .details .text-two {
+                font-size: 14px;
+                color: #afafb6;
+            }
+
+            .container .content .right-side {
+                width: 75%;
+                margin-left: 75px;
+            }
+
+            .content .right-side .topic-text {
+                font-size: 23px;
+                font-weight: 600;
+                color: var(--orange);
+            }
+
+            .right-side .input-box {
+                height: 50px;
+                width: 100%;
+                margin: 12px 0;
+            }
+
+            .right-side .input-box input,
+            .right-side .input-box textarea {
+                height: 100%;
+                width: 100%;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                background: #F0F1F8;
+                border-radius: 6px;
+                padding: 0 15px;
+                resize: none;
+            }
+
+            .right-side .message-box {
+                min-height: 110px;
+            }
+
+            .right-side .input-box textarea {
+                padding-top: 6px;
+            }
+
+            .right-side .button {
+                display: inline-block;
+                margin-top: 12px;
+            }
+
+            .right-side .button input[type="button"] {
+                color: #fff;
+                font-size: 18px;
+                outline: none;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 6px;
+                background: var(--orange);
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .button input[type="button"]:hover {
+                background: var(--orange);
+            }
+
+            @media (max-width: 950px) {
+                .container {
+                    width: 90%;
+                    padding: 30px 40px 40px 35px;
+                }
+
+                .container .content .right-side {
+                    width: 75%;
+                    margin-left: 55px;
+                }
+            }
+
+            @media (max-width: 820px) {
+                .container {
+                    margin: 40px 0;
+                    height: 100%;
+                }
+
+                .container .content {
+                    flex-direction: column-reverse;
+                }
+
+                .container .content .left-side {
+                    width: 100%;
+                    flex-direction: row;
+                    margin-top: 40px;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                }
+
+                .container .content .left-side::before {
+                    display: none;
+                }
+
+                .container .content .right-side {
+                    width: 100%;
+                    margin-left: 0;
+                }
+            }
+        </style>
+
+        <!-- <link rel="stylesheet" href="../templates/static/css/style.css"> -->
+        <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js" defer></script>
+        <!-- custom js file link  -->
+        <script src="/static/js/script.js" defer></script>
+    </head>
+
+    <body>
+        <!-- header section starts  -->
+        <header class="header">
+            <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> One Planet Fuel Station </a>
+
+            <nav class="navbar">
+                <a href="/app/index/">Home</a>
+                <a href="/app/LogIn/">Fuel-Station</a>
+                <a href="/app/Products/">Products</a>
+                <a href="/app/Reviews/">reviews</a>
+                <a href="/app/ContactUs/">Contact Us</a>
+                <a href="/app/AboutUs/">About Us</a>
+                <a href="/app/Careers/">Careers</a>
+            </nav>
+
+            <div class="dropdown cart-dropdown type2 mr-0 mr-lg-2">
+                <a href="#" class="cart-toggle label-block link">
+                    <div class="cart-label d-lg-show">
+                        <span class="cart-name">Shopping Cart:</span>
+                        <span class="cart-price">$0.00</span>
+                    </div>
+                    <i class="d-icon-bag"><span class="cart-count">2</span></i>
+                </a>
+                <div class="dropdown-box">
+                    <div class="products scrollable">
+                        <div class="product product-cart">
+                            <figure class="product-media">
+                                <a href="product.html">
+                                    <img src="images/cart/product-1.jpg" alt="product" width="80"
+                                        height="88" />
+                                </a>
+                                <button class="btn btn-link btn-close">
+                                    <i class="fas fa-times"></i><span class="sr-only">Close</span>
+                                </button>
+                            </figure>
+                            <div class="product-detail">
+                                <a href="product.html" class="product-name">Riode White Trends</a>
+                                <div class="price-box">
+                                    <span class="product-quantity">1</span>
+                                    <span class="product-price">$21.00</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- End of Cart Product -->
+                        <div class="product product-cart">
+                            <figure class="product-media">
+                                <a href="product.html">
+                                    <img src="images/cart/product-2.jpg" alt="product" width="80"
+                                        height="88" />
+                                </a>
+                                <button class="btn btn-link btn-close">
+                                    <i class="fas fa-times"></i><span class="sr-only">Close</span>
+                                </button>
+                            </figure>
+                            <div class="product-detail">
+                                <a href="product.html" class="product-name">Dark Blue Women’s
+                                    Leomora Hat</a>
+                                <div class="price-box">
+                                    <span class="product-quantity">1</span>
+                                    <span class="product-price">$118.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Cart Product -->
+                    </div>
+                    <!-- End of Products  -->
+                    <div class="cart-total">
+                        <label>Subtotal:</label>
+                        <span class="price">$139.00</span>
+                    </div>
+                    <!-- End of Cart Total -->
+                    <div class="cart-action">
+                        <a href="cart.html" class="btn btn-dark btn-link">View Cart</a>
+                        <a href="checkout.html" class="btn btn-dark"><span>Go To Checkout</span></a>
+                    </div>
+                    <!-- End of Cart Action -->
+                </div>
+                <!-- End Dropdown Box -->
+            </div>
+        </header>
+        <!-- header section ends -->
+
+        <br><br><br><br><br>
+        
+        <!-- <div class="container">
+            <div class="content">
+                <div class="left-side">
+                    <div class="address details"><i class="fas fa-map-marker-alt"></i>
+                        <div class="topic">Address</div>
+                        <div class="text-one">Islamabad</div>
+                        <div class="text-two">Pakistan</div>
+                    </div>
+                    <div class="phone details"><i class="fas fa-phone-alt"></i>
+                        <div class="topic">Phone</div>
+                        <div class="text-one">+92310-5021922</div>
+                        <div class="text-two">+92304-8986303</div>
+                    </div>
+                    <div class="email details"><i class="fas fa-envelope"></i>
+                        <div class="topic">Email</div>
+                        <div class="text-one">hm2572394@gmail.com</div>
+                        <div class="text-two">huzair9@gmail.com</div>
+                    </div>
+                </div>
+                
+                <div class="right-side">
+                    <div class="topic-text">Contact Us</div>
+            
+                    <form action="#">
+                        <div class="input-box"><input type="text" placeholder="Enter your name"></div>
+                        <div class="input-box"><input type="text" placeholder="Enter your email"></div>
+                        <div class="input-box"><input type="text" placeholder="Title"></div>
+                        <div class="input-box"><input type="text" placeholder="Message"></div>
+                        
+                        <div class="button"><input type="button" value="Send Now"></div>
+                    </form>
+                </div>
+            </div>
+        </div> -->
+
+        
+
+        <!-- <div class="shopping-cart">
+            <div class="box">
+                <i class="fas fa-trash"></i>
+                <img src="/static/image/F5.jpg" alt="">
+                <div class="content">
+                    <h3>Shell Oils</h3>
+                    <span class="price">Rs3000/-</span>
+                    <span class="quantity">qty : 1</span>
+                </div>
+            </div>
+            <div class="box">
+                <i class="fas fa-trash"></i>
+                <img src="/static/image/F4.jpg" alt="">
+                <div class="content">
+                    <h3>Total Oils</h3>
+                    <span class="price">Rs3000/-</span>
+                    <span class="quantity">qty : 1</span>
+                </div>
+            </div>
+            <div class="box">
+                <i class="fas fa-trash"></i>
+                <img src="/static/image/F1.jpg" alt="">
+                <div class="content">
+                    <h3>Havoline Oils</h3>
+                    <span class="price">Rs3000/-</span>
+                    <span class="quantity">qty : 1</span>
+                </div>
+            </div>
+            <div class="total"> total : RS9000/- </div>
+            <a href="#" class="btn">checkout</a>
+        </div> -->
+
+        <br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br>
+
+        <!-- footer section starts  -->
+        <section class="footer">
+            <div class="box-container">
+                <div class="box">
+                    <h3> One Planet Fuel Station <i class="fas fa-shopping-basket"></i> </h3>
+                    <p>Order from any fuel station you want.</p>
+                    <div class="share">
+                        <a href="#" class="fab fa-facebook-f"></a>
+                        <a href="#" class="fab fa-twitter"></a>
+                        <a href="#" class="fab fa-instagram"></a>
+                        <a href="#" class="fab fa-linkedin"></a>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h3>contact info</h3>
+                    <a href="#" class="links"> <i class="fas fa-phone"></i> +92310-5021922 </a>
+                    <a href="#" class="links"> <i class="fas fa-phone"></i> +92304-8986303 </a>
+                    <a href="#" class="links"> <i class="fas fa-envelope"></i> hm2572394@gmail.com </a>
+                    <a href="#" class="links"> <i class="fas fa-envelope"></i> huzair9@gmail.com </a>
+                    <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan - 44000 </a>
+                </div>
+
+                <div class="box">
+                    <h3>quick links</h3>
+                    <a href="/app/index/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                    <a href="/app/LogIn/" class="links"> <i class="fas fa-arrow-right"></i> Fuel-Station </a>
+                    <a href="/app/Products/" class="links"> <i class="fas fa-arrow-right"></i> Products </a>
+                    <a href="/app/Reviews/" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+                    <a href="/app/ContactUs/" class="links"> <i class="fas fa-arrow-right"></i> Contact us</a>
+                    <a href="/app/AboutUs/" class="links"> <i class="fas fa-arrow-right"></i> About Us </a>
+                    <a href="/app/Careers/" class="links"> <i class="fas fa-arrow-right"></i> Careers </a>
+                </div>
+            </div>
+
+            <div class="credit"> created by <span> UH Designers </span> | all rights reserved </div>
+        </section>
+        <!-- footer section ends -->
+    </body>
+</html>

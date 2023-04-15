@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+:root{
+    --orange:#ff7800;
+    --black:#130f40;
+    --light-color:#666;
+    --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.1);
+    --border:.2rem solid rgba(0,0,0,.1);
+    --outline:.1rem solid rgba(0,0,0,.1);
+    --outline-hover:.2rem solid var(--black);
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+}
+
+body{
+    background:#eee;
+}
+
+section{
+    padding:2rem 9%;
+}
+
+.heading{
+    text-align: center;
+    padding:2rem 0;
+    padding-bottom: 3rem;
+    font-size: 3.5rem;
+    color:var(--black);
+}
+
+.heading span{
+    background: var(--orange);
+    color:#fff;
+    display: inline-block;
+    padding:.5rem 3rem;
+    clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
+}
+
+.btn{
+    margin-top: 1rem;
+    display: inline-block;
+    padding:.8rem 3rem;
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    border:.2rem solid var(--black);
+    color:var(--black);
+    cursor: pointer;
+    background: none;
+}
+
+.btn:hover{
+    background: var(--orange);
+    color:#fff;
+}
+
+.header{
+    position: fixed;
+    top:0; left:0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:2rem 9%;
+    background:#fff;
+    box-shadow: var(--box-shadow);
+}
+
+.header .logo{
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color:var(--black);
+}
+
+.header .logo i{
+    color:var(--orange);
+}
+
+.header .navbar a{
+    font-size: 1.7rem;
+    margin:0 1rem;
+    color:var(--black);
+}
+
+.header .navbar a:hover{
+    color:var(--orange);
+}
+
+.header .icons div{
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background: #eee;
+    color:var(--black);
+    font-size: 2rem;
+    margin-left: .3rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.header .icons div:hover{
+    background: var(--orange);
+    color:#fff;
+}
+
+#menu-btn{
+    display: none;
+}
+
+.header .search-form{
+    position: absolute;
+    top:110%; right:-110%;
+    width: 50rem;
+    height:5rem;
+    background: #fff;
+    border-radius: .5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+}
+
+.header .search-form.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+.header .search-form input{
+    height:100%;
+    width:100%;
+    background: none;
+    text-transform: none;
+    font-size: 1.6rem;
+    color:var(--black);
+    padding:0 1.5rem;
+}
+
+.header .search-form label{
+    font-size: 2.2rem;
+    padding-right: 1.5rem;
+    color:var(--black);
+    cursor: pointer;
+}
+
+.header .search-form label:hover{
+    color:var(--orange);
+}
+
+.header .shopping-cart{
+    position: absolute;
+    top:110%; right:-110%;
+    padding:1rem;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    width:35rem;
+    background: #fff;
+}
+
+.header .shopping-cart.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+.header .shopping-cart .box{
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    position: relative;
+    margin:1rem 0;
+}
+
+.header .shopping-cart .box img{
+    height:10rem;
+}
+
+.header .shopping-cart .box .fa-trash{
+    font-size: 2rem;
+    position: absolute;
+    top:50%; right:2rem;
+    cursor: pointer;
+    color:var(--light-color);
+    transform: translateY(-50%);
+}
+
+.header .shopping-cart .box .fa-trash:hover{
+    color:var(--orange);
+}
+
+.header .shopping-cart .box .content h3{
+    color:var(--black);
+    font-size: 1.7rem;
+    padding-bottom: 1rem;
+}
+
+.header .shopping-cart .box .content span{
+    color:var(--light-color);
+    font-size: 1.6rem;
+}
+
+.header .shopping-cart .box .content .quantity{
+    padding-left: 1rem;
+}
+
+.header .shopping-cart .total{
+    font-size: 2.5rem;
+    padding:1rem 0;
+    text-align: center;
+    color:var(--black);
+}
+
+.header .shopping-cart .btn{
+    display: block;
+    text-align: center;
+    margin:1rem;
+}
+
+.header .login-form{
+    position: absolute;
+    top:110%; right:-110%;
+    width:35rem;
+    box-shadow: var(--box-shadow);
+    padding:2rem;
+    border-radius: .5rem;
+    background: #fff;
+    text-align: center;
+}
+
+.header .login-form.active{
+    right:2rem;
+    transition: .4s linear;
+}
+
+.header .login-form h3{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: var(--black);
+}
+
+.header .login-form .box{
+    width: 100%;
+    margin:.7rem 0;
+    background:#eee;
+    border-radius: .5rem;
+    padding:1rem;
+    font-size: 1.6rem;
+    color:var(--black);
+    text-transform: none;
+}
+
+.header .login-form p{
+    font-size: 1.4rem;
+    padding:.5rem 0;
+    color:var(--light-color);
+}
+
+.header .login-form p a{
+    color:var(--orange);
+    text-decoration: underline;
+}
+
+        
+      
+        .container1{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            
+            
+        }
+        .outercontainer{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            position: relative;
+            top:100px;
+        }
+        .container2{
+            width:350px;
+            position: relative;
+            top:20px;
+           
+            
+            
+        }
+        .container2 h4{
+            font-size:20px;
+        }
+        .container2 p{
+            color:rgb(110, 103, 103);
+            font-size: 15px;
+        }
+     
+       .aboutus-banner{
+        position: relative;
+        left:80px;
+     
+       }
+        .aboutus-section {
+
+padding: 90px 0;
+
+}
+
+
+
+.aboutus-title {
+
+font-size: 30px;
+
+letter-spacing: 0;
+
+line-height: 32px;
+
+margin: 0 0 39px;
+
+padding: 0 0 11px;
+
+position: relative;
+
+text-transform: uppercase;
+
+color: #000;
+
+}
+
+
+
+.aboutus-title::after {
+
+background: #fdb801 none repeat scroll 0 0;
+
+bottom: 0;
+
+content: "";
+
+height: 2px;
+
+left: 0;
+
+position: absolute;
+
+width: 54px;
+
+}
+
+
+
+.aboutus-text {
+
+color: #606060;
+
+font-size: 13px;
+
+width:250px;
+line-height: 22px;
+
+margin: 0 0 35px;
+
+}
+
+
+
+
+
+a:active {
+
+color: #ffb901;
+
+text-decoration: none;
+
+outline: 0;
+
+}
+
+
+
+.aboutus-more {
+
+border: 1px solid #fdb801;
+
+border-radius: 25px;
+
+color: #fdb801;
+
+display: inline-block;
+
+font-size: 14px;
+
+font-weight: 700;
+
+letter-spacing: 0;
+
+padding: 7px 20px;
+
+text-transform: uppercase;
+
+}
+
+.footer{
+    background: #fff;
+    position: relative;
+    top:150px;
+}
+
+.footer .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap:1.5rem;
+}
+
+.footer .box-container .box h3{
+    font-size: 2.5rem;
+    color:var(--black);
+    padding:1rem 0;
+}
+
+.footer .box-container .box h3 i{
+    color:var(--orange);
+}
+
+.footer .box-container .box .links{
+    display: block;
+    font-size: 1.5rem;
+    color:var(--light-color);
+    padding:1rem 0;
+}
+
+.footer .box-container .box .links i{
+    color:var(--orange);
+    padding-right: .5rem;
+}
+
+.footer .box-container .box .links:hover i{
+    padding-right: 2rem;
+}
+
+
+.footer .box-container .box p{
+    line-height: 1.8;
+    font-size: 1.5rem;
+    color:var(--light-color);
+    padding:1rem 0;
+}
+
+.footer .box-container .box .share a{
+    height:4rem;
+    width:4rem;
+    line-height:4rem;
+    border-radius: .5rem;
+    font-size: 2rem;
+    color:var(--black);
+    margin-right: .2rem;
+    background: #eee;
+    text-align: center;
+}
+
+.footer .box-container .box .share a:hover{
+    background: var(--orange);
+    color: #fff;
+}
+
+.footer .box-container .box .email{
+    width: 100%;
+    margin:.7rem 0;
+    padding:1rem;
+    border-radius: .5rem;
+    background: #eee;
+    font-size: 1.6rem;
+    color:var(--black);
+    text-transform: none;
+}
+
+.footer .box-container .box .payment-img{
+    margin-top: 2rem;
+    height: 3rem;
+    display: block;
+}
+
+.footer .credit{
+    text-align: center;
+    margin-top: 2rem;
+    padding:1rem;
+    padding-top: 2.5rem;
+    font-size: 2rem;
+    color:var(--black);
+    border-top: var(--border);
+}
+
+.footer .credit span{
+    color:var(--orange);
+}
+
+
+
+/* media queries  */
+
+@media (max-width:991px){
+
+    html{
+        font-size: 55%;
+    }
+
+    .header{
+        padding:2rem;
+    }
+
+    section{
+        padding:2rem;
+    }
+
+}
+
+@media (max-width:768px){
+
+    #menu-btn{
+        display: inline-block;
+    }
+
+    .header .search-form{
+        width:90%;
+    }
+
+    .header .navbar{
+        position: absolute;
+        top:110%; right:-110%;
+        width:30rem;
+        box-shadow: var(--box-shadow);
+        border-radius: .5rem;
+        background: #fff;
+    }
+
+    .header .navbar.active{
+        right:2rem;
+        transition: .4s linear;
+    }
+
+    .header .navbar a{
+        font-size: 2rem;
+        margin:2rem 2.5rem;
+        display: block;
+    }
+
+}
+
+@media (max-width:450px){
+
+    html{
+        font-size: 50%;
+    }
+
+    .heading{
+        font-size: 2.5rem;
+    }
+
+    .footer{
+        text-align: center;
+    }
+
+    .footer .box-container .box .payment-img{
+        margin: 2rem auto;
+    }
+
+}
+        
+            body {font-family: Verdana, sans-serif;}
+            .mySlides {display: none;}
+            img {vertical-align: middle;}
+
+            /* Slideshow container */
+            .slideshow-container {
+                max-width: 1000px;
+                position: relative;
+                margin: auto;
+            }
+
+            /* Caption text */
+            .text {
+                color: #f2f2f2;
+                font-size: 15px;
+                padding: 8px 12px;
+                position: absolute;
+                bottom: 8px;
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Number text (1/3 etc) */
+            .numbertext {
+                color: #f2f2f2;
+                font-size: 12px;
+                padding: 8px 12px;
+                position: absolute;
+                top: 0;
+            }
+
+            /* The dots/bullets/indicators */
+            .dot {
+                height: 15px;
+                width: 15px;
+                margin: 0 2px;
+                background-color: #bbb;
+                border-radius: 50%;
+                display: inline-block;
+                transition: background-color 0.6s ease;
+            }
+            .dot2 {
+                height: 15px;
+                width: 15px;
+                margin: 0 2px;
+                background-color: #bbb;
+                border-radius: 50%;
+                display: inline-block;
+                transition: background-color 0.6s ease;
+            }
+
+            .active {
+                background-color: #717171;
+            }
+
+            /* Fading animation */
+            .fade {
+                animation-name: fade;
+                animation-duration: 1.5s;
+            }
+
+            @keyframes fade {
+                from {opacity: .4} 
+                to {opacity: 1}
+            }
+
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 300px) {
+                .text {
+                    font-size: 11px
+                }
+            }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/app/index/" class="logo"><img src="/static/image/logo.jpg" alt=""  width="60" height="60"/></a>
+        <a href="/app/index/" class="logo">One Planet Fuel Station</a>
+    
+        <nav class="navbar">
+            <a href="/app/index/">Home</a>
+            <a href="/app/StationList/">Fuel-Station</a>
+            <a href="/app/AboutUs/">About Us</a>
+            <a href="/app/Careers/">Careers</a>
+            <a href="/app/LogIn/">LogIn/Register</a>
+        </nav>
+        
+    </header>
+    
+    <br><br><br><br>
+
+    <div class="outercontainer">
+        
+        <div class="container1">
+        <div class="aboutus">
+
+            <h2 class="aboutus-title">About Us</h2>
+
+            <p class="aboutus-text">Our System will provide a safe, reliable, and efficient way of users to help in online delivery of the fuel via any fuel station when you are stuck anywhere. User can order fuel through our mobile application or website, and they can avail the vehicle-based services.</p>
+
+            <p class="aboutus-text">Selling direct online increases Fuel Staion's reach which are suffering bad sales and users can also save time and they can get Fuel Products or Vehicle-based Services at their current location.</p>
+
+            <a class="aboutus-more" href="http://127.0.0.1:5500/Contact%20Us.html">read more</a>
+
+        </div>
+        <div class="aboutus-banner">
+
+            <img src="/static/image/download.png" alt="">
+
+        </div>
+    </div>
+        <div class="container2">
+        <div class="feature-content">
+
+            <h4>Work with heart</h4>
+            <br>
+
+            <p><small>To be successfull, You have to have your heart in your business, and your business in your heart.</small>.</p>
+            <br>
+        </div>
+
+        <div class="feature-content">
+<br>
+            <h4>Reliable services</h4>
+<br>
+            <p> <small>One Planet Fuel Station will make sure that both user and Fuel Station should be happy using our services.</small> </p>
+<br>
+        </div>
+        <div class="feature-content">
+<br>
+            <h4>Great support</h4>
+<br>
+            <p> <small>User or Fuel Station can contact us any time for any complaints or queries.</small> </p>
+
+        </div>
+    </div>
+    </div>
+
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+
+        <!-- review section starts  -->
+        <section class="review" id="review">
+            <h1 class="heading"> customer's <span>review</span> </h1>
+
+            <div class="swiper review-slider">
+                <div class="slideshow-container swiper-wrapper">
+                    <div class="mySlides fade swiper-slide box">
+                        <img src="/static/image/pic-1.png" alt="">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde sunt fugiat dolore ipsum id est maxime ad tempore quasi tenetur.</p>
+                        <h3>john deo</h3>
+                        
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="mySlides fade swiper-slide box">
+                        <img src="/static/image/pic-2.png" alt="">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde sunt fugiat dolore ipsum id est maxime ad tempore quasi tenetur.</p>
+                        <h3>john deo</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="mySlides fade swiper-slide box">
+                        <img src="/static/image/pic-3.png" alt="">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde sunt fugiat dolore ipsum id est maxime ad tempore quasi tenetur.</p>
+                        <h3>john deo</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="mySlides fade swiper-slide box">
+                        <img src="/static/image/pic-4.png" alt="">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde sunt fugiat dolore ipsum id est maxime ad tempore quasi tenetur.</p>
+                        <h3>john deo</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                
+                <div style="text-align:center">
+                    <span class="dot"></span> 
+                    <span class="dot"></span> 
+                    <span class="dot"></span> 
+                    <span class="dot"></span> 
+                </div>
+            </div>
+        </section>
+        <!-- review section ends -->
+
+        <script>
+            let slideIndex = 0;
+            showSlides();
+
+            function showSlides()
+            {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                let dots = document.getElementsByClassName("dot");
+
+                for (i = 0; i < slides.length; i++)
+                {
+                    slides[i].style.display = "none";  
+                }
+
+                slideIndex++;
+
+                if (slideIndex > slides.length)
+                {
+                    slideIndex = 1
+                }
+
+                for (i = 0; i < dots.length; i++)
+                {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+
+                slides[slideIndex-1].style.display = "block";  
+                dots[slideIndex-1].className += " active";
+                setTimeout(showSlides, 3000); // Change image every 3 seconds
+            }
+
+        </script>
+
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3> One Planet Fuel Station <i class="fas fa-shopping-basket"></i> </h3>
+                <p>Order from any fuel station you want.</p>
+                <div class="share">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+    
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#" class="links"> <i class="fas fa-phone"></i> +92310-5021922 </a>
+                <a href="#" class="links"> <i class="fas fa-phone"></i> +92304-8986303 </a>
+                <a href="#" class="links"> <i class="fas fa-envelope"></i> hm2572394@gmail.com </a>
+                <a href="#" class="links"> <i class="fas fa-envelope"></i> huzair9@gmail.com </a>
+                <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan - 44000 </a>
+            </div>
+    
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="/app/index/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                <a href="/app/LogIn/" class="links"> <i class="fas fa-arrow-right"></i> Fuel-Station </a>
+                <a href="/app/Products/" class="links"> <i class="fas fa-arrow-right"></i> Products </a>
+                <a href="/app/Reviews/" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+                <a href="/app/ContactUs/" class="links"> <i class="fas fa-arrow-right"></i> Contact us</a>
+                <a href="/app/AboutUs/" class="links"> <i class="fas fa-arrow-right"></i> About Us </a>
+                <a href="/app/Careers/" class="links"> <i class="fas fa-arrow-right"></i> Careers </a>
+            </div>
+        </div>
+        <div class="credit"> created by <span> UH Designers </span> | all rights reserved </div>
+    </section>
+</body>
+</html>

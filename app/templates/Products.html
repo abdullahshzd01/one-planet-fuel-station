@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Products</title>
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/demo2.min.css">
+
+        <style>
+            .filter-btn {
+                background-color: #FF7800;
+                border: none;
+                border-radius: 20px;
+                color: white;
+                padding: 6px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+            .filter-btn1 {
+                background-color: white; 
+                color: black; 
+                border: 2px solid #FF7800;
+            }
+
+            .filter-btn1:hover {
+                background-color: #FF7800;
+                color: white;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header class="header">
+            <a href="/app/index/" class="logo"><img src="/static/image/logo.jpg" alt=""  width="60" height="60"/></a>
+            <a href="/app/index/" class="logo">One Planet Fuel Station</a>
+
+            <nav class="navbar">
+                <a href="/app/index/">Home</a>
+                <a href="/app/LogIn/">Fuel-Station</a>
+                <a href="/app/Products/">Products</a>
+                <a href="/app/Reviews/">reviews</a>
+                <a href="/app/ContactUs/">Contact Us</a>
+                <a href="/app/AboutUs/">About Us</a>
+                <a href="/app/Careers/">Careers</a>
+            </nav>
+
+            <div class="dropdown cart-dropdown type2 mr-0 mr-lg-2">
+                <a href="#" class="cart-toggle label-block link">
+                    <div class="cart-label d-lg-show">
+                        <span class="cart-name">Shopping Cart:</span>
+                        <!-- <span class="cart-price">Rs 0.00</span> -->
+                    </div>
+                    <!-- <i class="d-icon-bag"><span class="cart-count">69</span></i> -->
+                    {% if count > 0 %}
+                    <i class='bx bx-cart'><span class="cart-count">{{ count }}</span></i>
+                    {% endif %}
+                    <i class='bx bx-cart'></i>
+                </a>
+
+                <div class="dropdown-box">
+                    <div class="products scrollable">
+                        {% for p in cart_product %}
+                        <div class="product product-cart">
+                            <figure class="product-media">
+                                <a href="#">
+                                    <!-- <img src="/static/image/F1.jpg" alt="product" width="80" height="88" /> -->
+                                    <img src="/app{{ p.image.url }}" alt="" width="80" height="88" />
+                                    <!-- <img src="{{ p.image.url }}" alt="product" width="80" height="88" /> -->
+                                </a>
+                                <!-- <button class="btn btn-link btn-close">
+                                    <i class="fas fa-times"></i><span class="sr-only">Close</span>
+                                </button> -->
+                            </figure>
+
+                            <div class="product-detail">
+                                <a href="#" class="product-name">{{p.title}}</a>
+                                <div class="price-box">
+                                    <!-- <span class="product-quantity">1</span> -->
+                                    <span class="product-price">Rs {{ p.price }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Cart Product -->
+                        {% endfor %}
+                    </div>
+
+                    {% if count > 0 %}
+                    <!-- End of Products  -->
+                    <div class="cart-total">
+                        <label>Subtotal:</label>
+                        <span class="price">Rs {{ subTotal }}</span>
+                    </div>
+                    <!-- End of Cart Total -->
+                    <div class="cart-action">
+                        <!-- <a href="#" class="btn btn-dark btn-link">View Cart</a> -->
+                        <a href="/app/Check-Out/" class="btn btn-dark"><span>Go To Checkout</span></a>
+                    </div>
+                    <!-- End of Cart Action -->
+                    {% endif %}
+                </div>
+                <!-- End Dropdown Box -->
+            </div>
+        </header>
+
+        <section class="products" id="products">
+            <br><br><br><br>
+            <h1 class="heading"> our <span>products</span> </h1>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input hidden style="position: relative;" type="text" value="0" name="cart" id="cart">
+                <select name="Filter" id="Filter">
+                  <option value="Category">Select a category</option>
+                  <option value="Fuel">Fuel</option>
+                  <option value="Engine Oils">Engine Oils</option>
+                  <option value="Vehicle-based services">Vehicle-based services</option>
+                  <option value="Tow services">Tow services</option>
+                </select>
+                <button class="filter-btn filter-btn1" type="submit">Filter</button>
+              </form>
+        
+            <div class="swiper product-slider">
+                <div class="">
+                    {% for p in product_list %}
+                        {% if filter == True %}
+                            {% if p.category == Fltr_val %}
+                                <div class="swiper-slide box">
+                                    <!-- <img src="/static/media/images/upreact5.png" alt=""> -->
+                                    <!-- <img src="/static/image/F5.jpg" alt=""> -->
+                                    <!-- <img src="{{ p.image.url }}" alt=""> -->
+                                    <img src="/app{{ p.image.url }}" alt="">
+                                    <!-- {{ p.image.url }} -->
+                                    <h3>{{ p.title }}</h3>
+                                    <!-- <h6>{{ p.id }}</h6> -->
+                                    
+                                    <div class="price">
+                                        Rs {{ p.price }} 
+                                    </div>
+
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+
+                                    <!-- <a href="#" class="btn">add to cart</a> -->
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <input style="position: relative;" type="text" value="Category" name="Filter" id="Filter" hidden>
+                                        <button class="btn" value="{{ p.id }}" name="cart" id="cart" type="submit">Add to Cart</button>
+                                    </form>
+                                </div>
+                                {% endif %}
+                            {% endif %}
+
+                            {% if filter == False %}
+                                <div class="swiper-slide box">
+                                    <!-- <img src="/static/image/F5.jpg" alt=""> -->
+                                    <img src="/app{{ p.image.url }}" alt="">
+                                    <!-- <img src="{{ p.image.url }}" alt=""> -->
+                                    <!-- <h4>/app{{ p.image.url }}</h4> -->
+                                    <h3>{{ p.title }}</h3>
+                                    <!-- <h6>{{ p.id }}</h6> -->
+                                    
+                                    <div class="price">
+                                        Rs {{ p.price }} 
+                                    </div>
+
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+
+                                    <!-- <a href="#" class="btn">add to cart</a> -->
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <!-- <input type="text" value="{{ p.id }}" name="cart" id="cart">
+                                        <button class="btn" type="submit">Add to Cart</button> -->
+
+                                        <!-- <input class="btn" type="submit" value="Add to Cart"> -->
+
+                                        <input style="position: relative;" type="text" value="Category" name="Filter" id="Filter" hidden>
+                                        <button class="btn" value="{{ p.id }}" name="cart" id="cart" type="submit">Add to Cart</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        <br><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="footer" style="background-color: white;">
+            <div class="box-container">
+                <div class="box">
+                    <h3> One Planet Fuel Station <i class="fas fa-shopping-basket"></i> </h3>
+                    <p>Order from any fuel station you want.</p>
+                    <div class="share">
+                        <a href="#" class="fab fa-facebook-f"></a>
+                        <a href="#" class="fab fa-twitter"></a>
+                        <a href="#" class="fab fa-instagram"></a>
+                        <a href="#" class="fab fa-linkedin"></a>
+                    </div>
+                </div>
+        
+                <div class="box">
+                    <h3>contact info</h3>
+                    <a href="#" class="links"> <i class="fas fa-phone"></i> +92310-5021922 </a>
+                    <a href="#" class="links"> <i class="fas fa-phone"></i> +923048986303 </a>
+                    <a href="#" class="links"> <i class="fas fa-envelope"></i> hm2572394@gmail.com </a>
+                    <a href="#" class="links"> <i class="fas fa-envelope"></i> huzair9@gmail.com </a>
+                    <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan - 44000 </a>
+                </div>
+        
+                <div class="box">
+                    <h3>quick links</h3>
+                    <a href="/app/index/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                    <a href="/app/LogIn/" class="links"> <i class="fas fa-arrow-right"></i> Fuel-Station </a>
+                    <a href="/app/Products/" class="links"> <i class="fas fa-arrow-right"></i> Products </a>
+                    <a href="/app/Reviews/" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+                    <a href="/app/ContactUs/" class="links"> <i class="fas fa-arrow-right"></i> Contact us</a>
+                    <a href="/app/AboutUs/" class="links"> <i class="fas fa-arrow-right"></i> About Us </a>
+                    <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Careers </a>
+                </div>
+            </div>
+
+            <div class="credit"> created by <span> UH Designers </span> | all rights reserved </div>
+        </section> 
+    </body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Now</title>
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #dfe9f5;
+    }
+
+    .wrapper {
+      height: 10%;
+      width: 330px;
+      padding: 2rem 0 1rem 0;
+      position: relative;
+      top:40px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #07001f;
+    }
+
+    p {
+      margin-bottom: 1.7rem;
+    }
+
+    form input {
+      width: 85%;
+      outline: none;
+      border: none;
+      background: #dfe9f5;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    #category {
+      width: 85%;
+      outline: none;
+      border: none;
+      background: #dfe9f5;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    .recover {
+      text-align: right;
+      font-size: 0.8rem;
+      margin: 0.2rem 1.7rem 0 0;
+    }
+
+    .recover a {
+      text-decoration: none;
+      color: #07001f;
+    }
+
+    button {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      padding: 8px 0;
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      width: 85%;
+      background: tomato;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: rgba(122, 30, 30, 0.767);
+    }
+
+    .or {
+      font-size: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+
+    .not-member {
+      font-size: 0.8rem;
+      margin-top: 1.4rem;
+    }
+
+    .not-member a {
+      color: tomato;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> One Planet Fuel Station </a>
+    <nav class="navbar">
+      <a href="/app/FuelStation/{{ station.id }}/">Dashboard</a>
+      <!-- <a href="/app/LogIn/">Fuel-Station</a> -->
+      <!-- <a href="/app/Products/">Products</a> -->
+      <a href="/app/Post-A-Job/{{ station.id }}/">Post Jobs</a>
+      <!-- <a href="/app/ContactUs/">Contact Us</a> -->
+      <a href="/app/AddProducts/{{ station.id }}/">Add Products</a>
+    </nav>
+  </header>
+
+  <br>
+
+  <div class="wrapper">
+    <h1>Add a Product</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="Title"></label>
+      <input type="text" placeholder="Title" id="Title" name="Title">
+      <label for="Description"></label>
+      <input type="text" placeholder="Description" id="Description" name="Description">
+      <label for="Category"></label>
+      <select name="Category" id="category">
+        <option value="Category">Select a category</option>
+        <option value="Fuel">Fuel</option>
+        <option value="Engine Oils">Engine Oils</option>
+        <option value="Vehicle-based services">Vehicle-based services</option>
+        <option value="Tow services">Tow services</option>
+      </select>
+      <label for="image"></label>
+      <label for="myfile"></label>
+      <input type="file" id="image" name="image">
+      <label for="price"></label>
+      <input type="text" placeholder="Price" id="Price" name="Price">
+      <label for="Details"></label>
+      <input type="text" placeholder="Details" id="Details" name="Details">
+      <button type="submit">Add Product</button>
+    </form>
+  </div>
+
+  <section class="footer">
+    <div class="box-container">
+      <div class="box">
+        <h3> One Planet Fuel Station <i class="fas fa-shopping-basket"></i> </h3>
+        <p>Order from any fuel station you want.</p>
+        <div class="share">
+          <a href="#" class="fab fa-facebook-f"></a>
+          <a href="#" class="fab fa-twitter"></a>
+          <a href="#" class="fab fa-instagram"></a>
+          <a href="#" class="fab fa-linkedin"></a>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3>contact info</h3>
+        <a href="#" class="links"> <i class="fas fa-phone"></i> +92310-5021922 </a>
+        <a href="#" class="links"> <i class="fas fa-phone"></i> +923048986303 </a>
+        <a href="#" class="links"> <i class="fas fa-envelope"></i> hm2572394@gmail.com </a>
+        <a href="#" class="links"> <i class="fas fa-envelope"></i> huzair9@gmail.com </a>
+        <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan - 44000 </a>
+      </div>
+
+      <div class="box">
+        <h3>quick links</h3>
+        <a href="/app/index/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+        <a href="/app/StationList/" class="links"> <i class="fas fa-arrow-right"></i> Fuel-Station </a>
+        <a href="/app/Products/" class="links"> <i class="fas fa-arrow-right"></i> Products </a>
+        <a href="/app/Reviews/" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+        <a href="/app/ContactUs/" class="links"> <i class="fas fa-arrow-right"></i> Contact us</a>
+        <a href="/app/AboutUs/" class="links"> <i class="fas fa-arrow-right"></i> About Us </a>
+        <a href="/app/Careers/" class="links"> <i class="fas fa-arrow-right"></i> Careers </a>
+      </div>
+    </div>
+
+    <div class="credit"> created by <span> UH Designers </span> | all rights reserved </div>
+  </section>
+</body>
+
+</html>

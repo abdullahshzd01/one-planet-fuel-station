@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <span class="dashboard"> <a class="nav-link" href="/app/myAdmin/dashboard/">Dashboard</a></span>
+            </div>
+        </nav>
+
+        <div class="home-content">
+            <!-- <h1>Welcome to One Station Admin Panel</h1> -->
+            <div class="overview-boxes">
+                <div class="box-topic"><h1>One Station Site Administration</h1></div>
+            </div>
+
+            <div class="sales-boxes">
+                <div class="recent-sales box">
+                    <div class="title"><a class="nav-link" href="/app/myAdmin/dashboard/{{ table_name }}/">{{ table_name }}</a></div>
+                    
+                    <div class="button">
+                        <a href="/app/myAdmin/dashboard/{{ table_name }}/add/0/">Add</a>
+                    </div>
+
+                    <div class="sales-details">
+                        <ul class="details">
+                            {% for data in table_data %}
+                            <li>
+                                <div style="width: 500px; height: 50px; padding: 10px;">
+                                    <a href="#"> {{ data }} </a>
+
+                                    <div style="float: right;">
+                                        <a href="/app/myAdmin/dashboard/{{ table_name }}/update/{{ data.id }}/" type="button" class="btn btn-outline-warning btn-sm">Update</a>
+                                        <a href="/app/myAdmin/dashboard/{{ table_name }}/delete/{{ data.id }}/" type="button" class="btn btn-outline-danger btn-sm">Delete</a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

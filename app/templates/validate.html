@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Now</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+      .header {
+        height: 9%
+      }
+
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: #dfe9f5;
+      }
+
+      .wrapper {
+        width: 330px;
+        padding: 2rem 0 1rem 0;
+        margin: 50px auto;
+        background: #fff;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+        position: relative;
+        top:30px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        color: #07001f;
+      }
+
+      p {
+        margin-bottom: 1.7rem;
+      }
+      form{
+        position: relative;
+        top:10px;
+      }
+
+      form input {
+        width: 85%;
+        outline: none;
+        border: none;
+        background: #dfe9f5;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+      }
+
+      .recover {
+        text-align: right;
+        font-size: 1.2rem;
+        margin: 0.2rem 1.7rem 0 0;
+        position: relative;
+        bottom:5px;
+        right:10px;
+      }
+
+      .recover a {
+        text-decoration: none;
+        color: #07001f;
+      
+      }
+
+      button {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        padding: 8px 0;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        width: 85%;
+        background: tomato;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: rgba(122, 30, 30, 0.767);
+      }
+
+      .or {
+        font-size: 0.8rem;
+        margin-top: 1.5rem;
+      }
+
+
+      .not-member {
+        font-size: 1.2rem;
+        margin-top: 1.4rem;
+      }
+
+      .not-member a {
+        color: tomato;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 10px;
+}
+/* The message box is shown when the user clicks on the password field */
+#phoneMessage {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+#phoneMessage p {
+  padding: 10px 35px;
+  font-size: 10px;
+}
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <a href="/app/index/" class="logo"><img src="/static/image/logo.jpg" alt=""  width="60" height="60"/></a>
+      <a href="/app/index/" class="logo">One Planet Fuel Station</a>
+      <nav class="navbar">
+        <a href="/app/index/">Home</a>
+        <a href="/app/StationList/">Fuel-Station</a>
+        <a href="/app/AboutUs/">About Us</a>
+        <a href="/app/Careers/">Careers</a>
+        <a href="/app/LogIn/">LogIn/Register</a>
+      </nav>
+    </div>
+
+    <div class="wrapper">
+      <h1>OTP Form</h1>
+
+      <form name="userAuthenticationForm" action="/app/AuthenticateUser/" onsubmit="return validateForm()" method="POST">
+        {% csrf_token %}
+        <input type="number" placeholder="Enter OTP" id="otp" name="otp"  required>
+        <input id="originalOTP" name="originalOTP" value="{{ otp }}" hidden>
+
+        <button id="submit" type="submit" value="Authenticate">Authenticate User</button>
+      </form>
+
+      <script>
+        function validateForm() {
+          let enteredOtp = document.forms["userAuthenticationForm"]["otp"].value;
+          let originalOTP = document.forms["userAuthenticationForm"]["originalOTP"].value;
+
+          if(enteredOtp != originalOTP)
+          {
+              alert("Failed to authenticate!");
+              return false;
+          }
+        }
+      </script>
+    </div>
+  </body>
+
+</html>

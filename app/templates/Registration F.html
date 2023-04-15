@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Now</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+      .header {
+        height: 9%
+      }
+
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: #dfe9f5;
+      }
+
+      .wrapper {
+        width: 330px;
+        padding: 2rem 0 1rem 0;
+        margin: 50px auto;
+        background: #fff;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+        position: relative;
+        top:30px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        color: #07001f;
+      }
+
+      p {
+        margin-bottom: 1.7rem;
+      }
+      form{
+        position: relative;
+        top:10px;
+      }
+
+      form input {
+        width: 85%;
+        outline: none;
+        border: none;
+        background: #dfe9f5;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+      }
+
+      .recover {
+        text-align: right;
+        font-size: 1.2rem;
+        margin: 0.2rem 1.7rem 0 0;
+        position: relative;
+        bottom:5px;
+        right:10px;
+      }
+
+      .recover a {
+        text-decoration: none;
+        color: #07001f;
+      
+      }
+
+      button {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        padding: 8px 0;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        width: 85%;
+        background: tomato;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: rgba(122, 30, 30, 0.767);
+      }
+
+      .or {
+        font-size: 0.8rem;
+        margin-top: 1.5rem;
+      }
+
+
+      .not-member {
+        font-size: 1.2rem;
+        margin-top: 1.4rem;
+      }
+
+      .not-member a {
+        color: tomato;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 10px;
+}
+/* The message box is shown when the user clicks on the password field */
+#phoneMessage {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 10px;
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+#phoneMessage p {
+  padding: 10px 35px;
+  font-size: 10px;
+}
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  /* content: "✔"; */
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  /* content: "✖"; */
+}
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <a href="/app/index/" class="logo"><img src="/static/image/logo.jpg" alt=""  width="60" height="60"/></a>
+      <a href="/app/index/" class="logo">One Planet Fuel Station</a>
+      <nav class="navbar">
+        <a href="/app/index/">Home</a>
+        <a href="/app/StationList/">Fuel-Station</a>
+        <a href="/app/AboutUs/">About Us</a>
+        <a href="/app/Careers/">Careers</a>
+        <a href="/app/LogIn/">LogIn/Register</a>
+      </nav>
+    </div>
+
+    <!-- <div class="wrapper" id="wrapperPhone" style="float: left; margin-left: 20px;">
+      <div id="phoneMessage">
+        <h3>Password must contain the following:</h3>
+        <p id="phoneNumbervalidation" class="invalid">Must be <b>11</b> Digits</p>
+      </div>
+    </div> -->
+
+    <!-- <div class="wrapper" id="wrapperPass" style="float: right; margin-right: 20px;">
+      <div id="message">
+        <h3>Password must contain the following:</h3>
+        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+        <p id="number" class="invalid">A <b>number</b></p>
+        <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+        <p id="special" class="invalid">A <b>special</b> character</p>
+      </div>
+    </div> -->
+
+    <div class="wrapper">
+      <h1>Sign Up as a Fuel Station</h1>
+
+      <form name="registrationForm" action="/app/Register/" onsubmit="return validateForm()" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Enter Fuel Station Name" id="stnName" name="stnName" required>
+        <input type="text" placeholder="Address" id="addrs" name="addrs"  required>
+        <input type="email" placeholder="Enter Your Email" id="email" name="email"  required>
+        <input type="number" placeholder="Number" id="phoneNo" name="phoneNo"  required>
+        <div id="phoneMessage">
+            <!-- <h3>Password must contain the following:</h3>
+            <p id="phoneNumbervalidation" class="invalid">Must be <b>11</b> Digits</p> -->
+
+            <p>
+              Phone <span id="phoneNumbervalidation" class="invalid">Must be <b>11</b> Digits</span>
+            </p>
+        </div>
+
+        <input type="password" placeholder="Password" id="password" name="password"  required>
+        <div id="message">
+          <!-- <h3>Password must contain the following:</h3> -->
+          <!-- <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+          <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+          <p id="number" class="invalid">A <b>number</b></p>
+          <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+          <p id="special" class="invalid">A <b>special</b> character</p> -->
+
+          <p>
+            Password must contain <span id="letter" class="invalid">A <b>lowercase</b> letter, </span> 
+            <span id="capital" class="invalid">A <b>capital (uppercase)</b> letter</span>
+            <span id="number" class="invalid">A <b>number</b></span>
+            <span id="length" class="invalid">Minimum <b>8 characters</b></span>
+            <span id="special" class="invalid">A <b>special</b> character</span>
+          </p>
+        </div>
+
+        <button id="submit" type="submit" value="Register">Register Now</button>
+
+        <script>
+          var myPhoneInput = document.getElementById("phoneNo");
+          var phonevalidation = document.getElementById("phoneNumbervalidation");
+          
+          // When the user clicks on the password field, show the message box
+          myPhoneInput.onfocus = function() {
+              document.getElementById("phoneMessage").style.display = "block";
+              document.getElementById("wrapperPhone").style.display = "block";
+          }
+          
+          // When the user clicks outside of the password field, hide the message box
+          myPhoneInput.onblur = function() {
+              document.getElementById("phoneMessage").style.display = "none";
+              document.getElementById("wrapperPhone").style.display = "none";
+          }
+          
+          // When the user starts to type something inside the password field
+          myPhoneInput.onkeyup = function() {
+              // Validate length
+              if(myPhoneInput.value.length == 11) {
+                  phonevalidation.classList.remove("invalid");
+                  phonevalidation.classList.add("valid");
+              } else {
+                  phonevalidation.classList.remove("valid");
+                  phonevalidation.classList.add("invalid");
+              }
+          }
+
+          var myInput = document.getElementById("password");
+          var letter = document.getElementById("letter");
+          var capital = document.getElementById("capital");
+          var number = document.getElementById("number");
+          var length = document.getElementById("length");
+          var special = document.getElementById("special");
+          
+          // When the user clicks on the password field, show the message box
+          myInput.onfocus = function() {
+            document.getElementById("message").style.display = "block";
+            document.getElementById("wrapperPass").style.display = "block";
+          }
+          
+          // When the user clicks outside of the password field, hide the message box
+          myInput.onblur = function() {
+            document.getElementById("message").style.display = "none";
+            document.getElementById("wrapperPass").style.display = "none";
+          }
+          
+          // When the user starts to type something inside the password field
+          myInput.onkeyup = function() {
+            // Validate lowercase letters
+            var lowerCaseLetters = /[a-z]/g;
+            if(myInput.value.match(lowerCaseLetters)) {  
+              letter.classList.remove("invalid");
+              letter.classList.add("valid");
+            } else {
+              letter.classList.remove("valid");
+              letter.classList.add("invalid");
+            }
+            
+            // Validate capital letters
+            var upperCaseLetters = /[A-Z]/g;
+            if(myInput.value.match(upperCaseLetters)) {  
+              capital.classList.remove("invalid");
+              capital.classList.add("valid");
+            } else {
+              capital.classList.remove("valid");
+              capital.classList.add("invalid");
+            }
+          
+            // Validate numbers
+            var numbers = /[0-9]/g;
+            if(myInput.value.match(numbers)) {  
+              number.classList.remove("invalid");
+              number.classList.add("valid");
+            } else {
+              number.classList.remove("valid");
+              number.classList.add("invalid");
+            }
+            
+            // Validate length
+            if(myInput.value.length >= 8) {
+              length.classList.remove("invalid");
+              length.classList.add("valid");
+            } else {
+              length.classList.remove("valid");
+              length.classList.add("invalid");
+            }
+            
+            // Validate special
+            var specials = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+            if(myInput.value.match(specials)) {
+              special.classList.remove("invalid");
+              special.classList.add("valid");
+            } else {
+              special.classList.remove("valid");
+              special.classList.add("invalid");
+            }
+          }
+        </script>
+      </form>
+
+      <script>
+        var lowerCaseLetters = /[a-z]/g;
+        // var specials = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+        var specials = /(?=.*[!@#$%^&*])/;
+        var numbers = /[0-9]/g;
+        var upperCaseLetters = /[A-Z]/g;
+        var comCheck = '.com';
+        
+        function validateForm() {
+          let email = document.forms["registrationForm"]["email"].value;
+          let password = document.forms["registrationForm"]["password"].value;
+          let phoneNo = document.forms["registrationForm"]["phoneNo"].value;
+
+          console.log("email => ", email);
+
+          // if(!email.includes('.com'))
+          // {
+          //     alert("Invalid mail!");
+          //     return false;
+          // }
+
+          if (phoneNo.length != 11)
+          {
+              alert("Invalid Phone number! Must be of 11 digits");
+              return false;
+          }
+
+          if (password == "")
+          {
+            alert("Password is empty");
+            return false;
+          }
+          
+          if (password.length < 8)
+          {
+            alert("Weak Password! A Password should be of atleast 8 characters");
+            return false;
+          }
+          if (!password.match(numbers))
+          {
+            alert("Weak Password! Add some numbers");
+            return false;
+          }
+          if (!password.match(lowerCaseLetters))
+          {
+            alert("Weak Password! Add some lower case letters");
+            return false;
+          }
+          if (!password.match(specials))
+          {
+            alert("Weak Password! Add some special characters");
+            return false;
+          }
+          if (!password.match(upperCaseLetters))
+          {
+            alert("Weak Password! Add some upper case letters");
+            return false;
+          }
+        }
+      </script>
+
+      <div class="not-member">
+        Already have an account? <a href="/app/LogIn/">Log In</a>
+      </div>
+    </div>
+
+    <section class="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3> One Planet Fuel Station <i class="fas fa-shopping-basket"></i> </h3>
+          <p>Order from any fuel station you want.</p>
+          <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3>contact info</h3>
+          <a href="#" class="links"> <i class="fas fa-phone"></i> +92310-5021922 </a>
+          <a href="#" class="links"> <i class="fas fa-phone"></i> +92304-8986303 </a>
+          <a href="#" class="links"> <i class="fas fa-envelope"></i> hm2572394@gmail.com </a>
+          <a href="#" class="links"> <i class="fas fa-envelope"></i> huzair9@gmail.com </a>
+          <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan - 44000 </a>
+        </div>
+
+        <div class="box">
+          <h3>quick links</h3>
+          <a href="/app/index/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+          <a href="/app/LogIn/" class="links"> <i class="fas fa-arrow-right"></i> Fuel-Station </a>
+          <a href="/app/Products/" class="links"> <i class="fas fa-arrow-right"></i> Products </a>
+          <a href="/app/Reviews/" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+          <a href="/app/ContactUs/" class="links"> <i class="fas fa-arrow-right"></i> Contact us</a>
+          <a href="/app/AboutUs/" class="links"> <i class="fas fa-arrow-right"></i> About Us </a>
+          <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Careers </a>
+        </div>
+      </div>
+
+      <div class="credit"> created by <span> UH Designers </span> | all rights reserved </div>
+    </section>
+  </body>
+
+</html>

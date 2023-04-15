@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuel Station</title>
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    .header {
+      height: 9%
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #dfe9f5;
+    }
+
+    .wrapper {
+      height: 10%;
+      width: 330px;
+      padding: 2rem 0 1rem 0;
+      position: relative;
+      top:40px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    }
+    .wrapper p{
+      position: relative;
+      top:10px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #07001f;
+    }
+
+    p {
+      margin-bottom: 1.7rem;
+    }
+
+    form input {
+      width: 85%;
+      outline: none;
+      border: none;
+      background: #dfe9f5;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    .recover {
+      padding-bottom: 10px;
+      padding-right: 10px;
+      text-align: right;
+      font-size: 1.2rem;
+      margin: 0.2rem 1.7rem 0 0;
+    }
+
+    .recover a {
+      text-decoration: none;
+      color: #07001f;
+    }
+
+    button {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      padding: 8px 0;
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      width: 85%;
+      background: tomato;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: rgba(122, 30, 30, 0.767);
+    }
+
+    .or {
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .icons i {
+      color: #07001f;
+      padding: 00.8rem 1.5rem;
+      border-radius: 10px;
+      margin-left: .9rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border: 2px solid #dfe9f5;
+    }
+
+    .icons i:hover {
+      color: #fff !important;
+      background: #07001f;
+      transition: 1s;
+    }
+
+    .icons i:first-child {
+      color: green;
+    }
+
+    .icons i:last-child {
+      color: blue;
+    }
+
+    .not-member {
+      font-size: 1.2rem;
+      margin-top: 1.4rem;
+    }
+
+    .not-member a {
+      color: tomato;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer{
+      position: relative;
+      top:20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <a href="/app/index/" class="logo"><img src="/static/image/logo.jpg" alt=""  width="60" height="60"/></a>
+    <a href="/app/index/" class="logo">One Planet Fuel Station</a>
+    <nav class="navbar">
+      <a href="/app/index/">Home</a>
+      <a href="/app/StationList/">Fuel-Station</a>
+      <a href="/app/AboutUs/">About Us</a>
+      <a href="/app/Careers/">Careers</a>
+      <a href="/app/LogIn/">LogIn/Register</a>
+    </nav>
+  </div>
+
+  <div class="wrapper">
+    <h1>Sign In as a Fuel Station</h1>
+    <p>Sign In to our System</p>
+    <form action="/app/LogIn/" method="POST">
+      {% csrf_token %}
+      <input type="email" placeholder="Enter email" id="email" name="email">
+      <input type="password" placeholder="Password" id="password" name="password">
+      <p class="recover">
+        <a href="#">Recover Password</a>
+      </p>
+      <button value="submit">Log in</button>
+    </form>
+
+    <p class="or">
+      ----- or continue with -----
+    </p>
+
+    <div class="icons">
+      <i class="fab fa-google"></i>
+      <i class="fas fa-phone"></i>
+    </div>
+
+    <div class="not-member">
+      Not a member? <a href="/app/Register/">Register Now</a>
+    </div>
+  </div>
+
+  <section class="footer">
+
+    <div class="box-container">
+
+      <div class="box">
+        <h3> One Planet Fuel Station <i class="fas fa-shopping-basket"></i> </h3>
+        <p>Order from any fuel station you want.</p>
+        <div class="share">
+          <a href="#" class="fab fa-facebook-f"></a>
+          <a href="#" class="fab fa-twitter"></a>
+          <a href="#" class="fab fa-instagram"></a>
+          <a href="#" class="fab fa-linkedin"></a>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3>contact info</h3>
+        <a href="#" class="links"> <i class="fas fa-phone"></i> +92310-5021922 </a>
+        <a href="#" class="links"> <i class="fas fa-phone"></i> +92304-8986303 </a>
+        <a href="#" class="links"> <i class="fas fa-envelope"></i> hm2572394@gmail.com </a>
+        <a href="#" class="links"> <i class="fas fa-envelope"></i> huzair9@gmail.com </a>
+        <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan - 44000 </a>
+      </div>
+
+      <div class="box">
+        <h3>quick links</h3>
+        <a href="/app/index/" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+        <a href="/app/StationList/" class="links"> <i class="fas fa-arrow-right"></i> Fuel-Station </a>
+        <a href="/app/Products/" class="links"> <i class="fas fa-arrow-right"></i> Products </a>
+        <a href="/app/Reviews/" class="links"> <i class="fas fa-arrow-right"></i> review </a>
+        <a href="/app/ContactUs/" class="links"> <i class="fas fa-arrow-right"></i> Contact us</a>
+        <a href="/app/AboutUs/" class="links"> <i class="fas fa-arrow-right"></i> About Us </a>
+        <a href="/app/Careers/" class="links"> <i class="fas fa-arrow-right"></i> Careers </a>
+      </div>
+
+      
+
+    </div>
+
+    <div class="credit"> created by <span> UH Designers </span> | all rights reserved </div>
+
+  </section>
+</body>
+
+</html>
