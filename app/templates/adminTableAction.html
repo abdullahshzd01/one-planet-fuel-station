@@ -60,9 +60,11 @@
                                             <label>{{ n }}:</label><br>
                                             
                                             {% if n == "image" %}
-                                                <input type="file" id="{{ n }}" name="{{ n }}">
+                                                <input type="file" id="{{ n }}" name="{{ n }}" value="{{ n }}">
+                                                <p>{{ d }}</p>
                                             {% elif n == "cv" %}
-                                                <input type="file" id="{{ n }}" name="{{ n }}">
+                                                <input type="file" id="{{ n }}" name="{{ n }}" value="{{ n }}">
+                                                <p>{{ d }}</p>
                                             {% else %}
                                                 <textarea style="display: block; float: left;" name="{{ n }}" id="{{ n }}" cols="50" rows="1">{{ d }}</textarea>
                                             {% endif %}

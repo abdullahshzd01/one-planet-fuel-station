@@ -58,6 +58,35 @@ fIdx = 0
 # authe = firebase.auth()
 # database=firebase.database()
 
+# some useful functions
+def getFuelStationName(fs_id):
+    try:
+        entity = fuelStations.objects.get(id=fs_id)
+        return entity.name
+    except fuelStations.DoesNotExist:
+        return None
+
+def getUserName(usr_id):
+    try:
+        entity = users.objects.get(id=usr_id)
+        return entity.firstName+' '+entity.LastName
+    except users.DoesNotExist:
+        return None
+
+def getProductTitle(prdct_id):
+    try:
+        entity = products.objects.get(id=prdct_id)
+        return entity.title
+    except products.DoesNotExist:
+        return None
+
+def getJobName(job_id):
+    try:
+        entity = jobs.objects.get(id=job_id)
+        return entity.job_name
+    except jobs.DoesNotExist:
+        return None
+
 # Create your views here.
 def site(request):
     product_list = products.objects.all()
@@ -1402,15 +1431,35 @@ def AdminSiteAction(request, table_name, action, data_id):
                     print("Admin add Fuel Station sucessfull")
 
             if table_name == "applicant":
+                job = request.POST['job']
                 aplcnt = request.POST['user']
                 cv = request.POST['cv']
 
+                print("====================")
+                print("job => ", job)
+                print("aplcnt => ", aplcnt)
+                print("cv => ", cv)
+
+                first_name, last_name = aplcnt.split(' ')
+                
+                print("first_name => ", first_name)
+                print("last_name => ", last_name)
+
                 query = True
+                print("--------------------")
+
+                job_obj = jobs.objects.get(job_name=job)
+                usr_obj = users.objects.get(firstName=first_name, LastName=last_name)
+
+                print("job_obj => ", job_obj)
+                print("usr_obj => ", usr_obj)
+                print("====================")
 
                 if query:
                     db_add = applicant()
 
-                    db_add.user = aplcnt
+                    db_add.job = job_obj
+                    db_add.user = usr_obj
                     db_add.cv = cv
                     
                     db_add.save()
@@ -1509,7 +1558,10 @@ def AdminSiteAction(request, table_name, action, data_id):
                 product.title = title
                 product.description = dscrptn
                 product.category = catgry
-                product.image = image
+
+                if image != "":
+                    product.image = "images/"+image
+
                 product.price = price
                 product.details = details
                 
@@ -1535,13 +1587,26 @@ def AdminSiteAction(request, table_name, action, data_id):
                 print("Admin add Fuel Station sucessfull")
 
             if table_name == "applicant":
+                job = request.POST['job']
                 user = request.POST['user']
                 cv = request.POST['cv']
 
+                print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
+                print("job -> ", job)
+                print("user -> ", user)
+                print("cv -> ", cv)
+                # if cv == "":
+                #     print("fahfjkah fk")
+                print("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓")
+
+                first_name, last_name = user.split(' ')
                 aplcnt = applicant.objects.get(pk=data_id)
 
-                aplcnt.user = user
-                aplcnt.cv = cv
+                aplcnt.job = jobs.objects.get(job_name=job)
+                aplcnt.user = users.objects.get(firstName=first_name, LastName=last_name)
+                
+                if cv != "":
+                    aplcnt.cv = cv
                 
                 aplcnt.save()
 
@@ -1600,8 +1665,10 @@ def AdminSiteAction(request, table_name, action, data_id):
                 rating = request.POST['rating']
 
                 reviewUp = reviews.objects.get(pk=data_id)
+                
+                first_name, last_name = userReview.split(' ')
 
-                reviewUp.user = users.objects.get(pk=userReview)
+                reviewUp.user = users.objects.get(firstName=first_name, LastName=last_name)
                 reviewUp.review = review
                 reviewUp.rating = rating
                 
@@ -1670,9 +1737,22 @@ def AdminSiteAction(request, table_name, action, data_id):
         print("________")
         for n in field_names:
             # print(entity[n])
-            print(n, ": ", entity[n])
-            entityDataList.append(entity[n])
-
+            if n == "Customer":
+                print(n, ": ", getUserName(entity[n]))
+                entityDataList.append(getUserName(entity[n]))
+            elif n == "user":
+                print(n, ": ", getUserName(entity[n]))
+                entityDataList.append(getUserName(entity[n]))
+            elif n == "fuelStation":
+                print(n, ": ", getFuelStationName(entity[n]))
+                entityDataList.append(getFuelStationName(entity[n]))
+            elif n == "job":
+                print(n, ": ", getJobName(entity[n]))
+                entityDataList.append(getJobName(entity[n]))
+            else:
+                print(n, ": ", entity[n])
+                entityDataList.append(entity[n])
+ 
         # entityDataList = list(entity.values())
         context['entityDataList'] = entityDataList
 

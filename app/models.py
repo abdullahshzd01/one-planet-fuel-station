@@ -66,8 +66,8 @@ class cart(models.Model):
     products = models.ManyToManyField(products, blank=True)
 
     def __str__(self):
-        # return self.cart_id
-        return self.user
+        # return self.id
+        return self.user.firstName + ' ' + self.user.LastName
 
 class jobs(models.Model):
     job_name = models.CharField(max_length=150, null=True, blank=True)
@@ -82,7 +82,7 @@ class jobs(models.Model):
         return self.job_name
 
 class applicant(models.Model):
-    job = models.ManyToManyField(jobs, blank=True)
+    job = models.ForeignKey(jobs, blank=True, null=True, on_delete=models.CASCADE)
     user = models.ForeignKey(users, blank=True, on_delete=models.CASCADE)
     cv = models.FileField(null=True, blank=True, upload_to="CVs/")
 
