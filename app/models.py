@@ -106,7 +106,7 @@ class myAdmin(models.Model):
 
 class order(models.Model):
     totalCost = models.FloatField()
-    # product = models.ManyToOneRel(products)
+    productList = models.ManyToManyField(products)
     Customer = models.ForeignKey(users, blank=True, null=True, on_delete=models.CASCADE)
     orderDate = models.DateField(auto_now_add=True)
     fuelStation = models.ForeignKey(fuelStations, blank=True, null=True, on_delete=models.CASCADE)

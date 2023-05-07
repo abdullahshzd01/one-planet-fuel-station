@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+    <head>
+        <meta charset="UTF-8">
+        <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+        <link rel="stylesheet" href="/static/css/dashboard.css">
+        <!-- Boxicons CDN Link -->
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            .home-content .sales-boxes .recent-sales {
+                width: 95%;
+                background: #fff;
+                padding: 20px 30px;
+                margin: 0 20px;
+                border-radius: 12px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .no-underline {
+                text-decoration: none;
+                color: black;
+            }
+        </style>
+
+        <!-- ChartJS CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/chartjs@0.3.24/chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+
+    <body>
+        <div class="sidebar">
+            <div class="logo-details">
+                <i class='bx bxl-c-plus-plus'></i>
+                <span class="logo_name">One Planet Fuel Station</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/app/FuelStation/{{ station.id }}/">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/AddProducts/{{ station.id }}/">
+                        <i class='bx bx-box'></i>
+                        <span class="links_name">Product</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/FuelStation/Analytics/{{ station.id }}/">
+                        <i class='bx bx-pie-chart-alt-2'></i>
+                        <span class="links_name">Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/FuelStation/TotalOrders/{{ station.id }}/" class="active">
+                        <i class='bx bx-book-alt'></i>
+                        <span class="links_name">Total order</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/Post-A-Job/{{ station.id }}/">
+                        <i class='bx bx-folder-plus'></i>
+                        <span class="links_name">Post Jobs</span>
+                    </a>
+                </li>
+                <li class="log_out">
+                    <a href="/app/LogIn/">
+                        <i class='bx bx-log-out'></i>
+                        <span class="links_name">Log out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <section class="home-section">
+            <nav>
+                <div class="sidebar-button">
+                    <i class='bx bx-menu sidebarBtn'></i>
+                    <a class="no-underline" href="/app/FuelStation/{{ station.id }}/">
+                        <span class="dashboard">Dashboard</span>
+                    </a>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Search...">
+                    <i class='bx bx-search'></i>
+                </div>
+                <div class="profile-details">
+                    <span class="admin_name">Admin@{{ station.name }}</span>
+                </div>
+            </nav>
+
+            <div class="home-content">
+                <br>
+                <div class="sales-boxes">
+                    <div class="recent-sales box">
+                        <div class="title">Recent Sales</div>
+                        <div class="sales-details">
+                            <ul class="details">
+                                <li class="topic">Date</li>
+
+                                {% for ordr in orderList %}
+                                    {% if ordr.fuelStation == station %}
+                                        <li><a href="#">{{ ordr.orderDate }}</a></li>
+                                    {% endif %}
+                                {% endfor %}                            
+                            </ul>
+                            <ul class="details">
+                                <li class="topic">Customer</li>
+
+                                {% for ordr in orderList %}
+                                    {% if ordr.fuelStation == station %}
+                                        <li><a href="#">{{ ordr.Customer }}</a></li>
+                                    {% endif %}
+                                {% endfor %}                            
+                            </ul>
+                            <ul class="details">
+                                <li class="topic">Total</li>
+
+                                {% for ordr in orderList %}
+                                    {% if ordr.fuelStation == station %}
+                                        <li><a href="#">{{ ordr.totalCost }}</a></li>
+                                    {% endif %}
+                                {% endfor %}                            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".sidebarBtn");
+            sidebarBtn.onclick = function () {
+                sidebar.classList.toggle("active");
+                if (sidebar.classList.contains("active")) {
+                    sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+                } else
+                    sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+            }
+        </script>
+
+    </body>
+</html>

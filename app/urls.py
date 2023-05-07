@@ -12,6 +12,8 @@ urlpatterns = [
     path('index/', views.site),
     path('demo/', views.demo),
     path('FuelStation/<int:station_id>/', views.fuelStation_view),
+    path('FuelStation/Analytics/<int:station_id>/', views.fuelStationAnalytics_view),
+    path('FuelStation/TotalOrders/<int:station_id>/', views.fuelStationOrders_view),
     path('StationList/', views.fuelStationList_view),
     # path('Products/', views.products_view),
     path('Products/<int:station_id>/', views.products2_view),

@@ -2,270 +2,285 @@
 
 <html lang="en" dir="ltr">
 
-<head>
-    <meta charset="UTF-8">
-    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
-    <link rel="stylesheet" href="/static/css/dashboard.css">
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+        <link rel="stylesheet" href="/static/css/dashboard.css">
+        <!-- Boxicons CDN Link -->
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body>
-    <div class="sidebar">
-        <div class="logo-details">
-            <i class='bx bxl-c-plus-plus'></i>
-            <span class="logo_name">One Planet Fuel Station</span>
+        <style>
+            .DashnavBar {
+                background-color: #e05260;
+            }
+
+            .analytics-box-topic {
+                font-size: 28px;
+                font-weight: 500;
+            }
+
+            .no-underline {
+                text-decoration: none;
+                color: black;
+            }
+
+            .chartFrame {
+                justify-content: center;
+                display: flex;
+                /* height: fit-content;
+                width: 800px; */
+            }
+
+            .myChart {
+                height: fit-content;
+                width: 800px;
+            }
+
+            #myChart {
+                /* background-color: white; */
+                border-radius: 20px;
+            }
+        </style>
+
+        <!-- ChartJS CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/chartjs@0.3.24/chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+
+    <body>
+        <div class="sidebar">
+            <div class="logo-details">
+                <i class='bx bxl-c-plus-plus'></i>
+                <span class="logo_name">One Planet Fuel Station</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/app/FuelStation/{{ station.id }}/" class="active">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/AddProducts/{{ station.id }}/">
+                        <i class='bx bx-box'></i>
+                        <span class="links_name">Product</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/FuelStation/Analytics/{{ station.id }}/">
+                        <i class='bx bx-pie-chart-alt-2'></i>
+                        <span class="links_name">Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/FuelStation/TotalOrders/{{ station.id }}/">
+                        <i class='bx bx-book-alt'></i>
+                        <span class="links_name">Total order</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/Post-A-Job/{{ station.id }}/">
+                        <i class='bx bx-folder-plus'></i>
+                        <span class="links_name">Post Jobs</span>
+                    </a>
+                </li>
+                <li class="log_out">
+                    <a href="/app/LogIn/">
+                        <i class='bx bx-log-out'></i>
+                        <span class="links_name">Log out</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <ul class="nav-links">
-            <li>
-                <a href="#" class="active">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="/app/AddProducts/{{ station.id }}/">
-                    <i class='bx bx-box'></i>
-                    <span class="links_name">Product</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-list-ul'></i>
-                    <span class="links_name">Order list</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-pie-chart-alt-2'></i>
-                    <span class="links_name">Analytics</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-coin-stack'></i>
-                    <span class="links_name">Stock</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-book-alt'></i>
-                    <span class="links_name">Total order</span>
-                </a>
-            </li>
-            <li>
-                <a href="/app/Post-A-Job/{{ station.id }}/">
-                    <i class='bx bx-folder-plus'></i>
-                    <span class="links_name">Post Jobs</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-message'></i>
-                    <span class="links_name">Messages</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-heart'></i>
-                    <span class="links_name">Favrorites</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-cog'></i>
-                    <span class="links_name">Setting</span>
-                </a>
-            </li>
-            <li class="log_out">
-                <a href="/app/LogIn/">
-                    <i class='bx bx-log-out'></i>
-                    <span class="links_name">Log out</span>
-                </a>
-            </li>
-        </ul>
-    </div>
 
-    <section class="home-section">
-        <nav>
-            <div class="sidebar-button">
-                <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Dashboard</span>
-            </div>
-            <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <i class='bx bx-search'></i>
-            </div>
-            <div class="profile-details">
-                <!--<img src="images/profile.jpg" alt="">-->
-                <span class="admin_name">{{ station.name }}</span>
-                <!-- <i class='bx bx-chevron-down'></i> -->
-            </div>
-        </nav>
-
-        <div class="home-content">
-            <!-- <h1>Welcome {{ station.name }} station</h1> -->
-            <div class="overview-boxes">
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Order</div>
-                        <div class="number">{{ orderNum }}</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
-                    </div>
-                    <i class='bx bx-cart-alt cart'></i>
+        <section class="home-section">
+            <nav>
+                <div class="sidebar-button">
+                    <i class='bx bx-menu sidebarBtn'></i>
+                    <a class="no-underline" href="/app/FuelStation/{{ station.id }}/">
+                        <span class="dashboard">Dashboard</span>
+                    </a>
                 </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Sales</div>
-                        <div class="number">{{ sales }}</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
-                    </div>
-                    <i class='bx bxs-cart-add cart two'></i>
+                <div class="search-box">
+                    <input type="text" placeholder="Search...">
+                    <i class='bx bx-search'></i>
                 </div>
-                <!-- <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Profit</div>
-                        <div class="number">PKR 12,876</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
+                <div class="profile-details">
+                    <span class="admin_name">Admin@{{ station.name }}</span>
+                </div>
+            </nav>
+
+            <div class="home-content">
+                <div class="overview-boxes">
+                    <div class="box">
+                        <div class="right-side">
+                            <div class="box-topic">Total Order</div>
+                            <div class="number">{{ orderNum }}</div>
+                            <div class="indicator">
+                                <i class='bx bx-up-arrow-alt'></i>
+                                <span class="text">Up from yesterday</span>
+                            </div>
+                        </div>
+                        <i class='bx bx-cart-alt cart'></i>
+                    </div>
+                    <div class="box">
+                        <div class="right-side">
+                            <div class="box-topic">Total Sales</div>
+                            <div class="number">{{ sales }}</div>
+                            <div class="indicator">
+                                <i class='bx bx-up-arrow-alt'></i>
+                                <span class="text">Up from yesterday</span>
+                            </div>
+                        </div>
+                        <i class='bx bxs-cart-add cart two'></i>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="analytics box">
+                        <a class="no-underline" href="/app/FuelStation/Analytics/{{ station.id }}/">
+                            <div class="analytics-box-topic">{{ station.name }}'s recent sales
+                            </div>
+                            <br>
+                            <div class="chartFrame">
+                                <div class="myChart">
+                                    <canvas id="myChart" aria-label="Hello ARIA World" role="img"></canvas>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <script>
+                        const ctx = document.getElementById('myChart').getContext('2d');
+
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                labels: [
+                                    {% for customer in customer_list %} '{{ customer }}', {% endfor %}
+                                ],
+                                datasets: [{
+                                    label: 'Recent Sales by Customers',
+                                    data: [
+                                        {% for cost in totalCost_list %} '{{ cost }}', {% endfor %}
+                                    ],
+                                    borderWidth: 2,
+                                    backgroundColor: ['rgb(231, 120, 144)']
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                },
+                                // animation: {
+                                //     onComplete: () => {
+                                //         delayed = true;
+                                //     },
+                                //     delay: (context) => {
+                                //         let delay = 0;
+                                //         if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                                //             delay = context.dataIndex * 3 + context.datasetIndex * 1;
+                                //         }
+                                //         return delay;
+                                //     },
+                                // }
+                            }
+                        });
+                    </script>
+                </div>
+
+                <br>
+
+                <div class="sales-boxes">
+                    <div class="recent-sales box">
+                        <div class="title">Recent Sales</div>
+                        <div class="sales-details">
+                            <ul class="details">
+                                <li class="topic">Date</li>
+
+                                {% for ordr in latestOrders %}
+                                    {% if ordr.fuelStation == station %}
+                                        <li>{{ ordr.orderDate }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            <ul class="details">
+                                <li class="topic">Customer</li>
+
+                                {% for ordr in latestOrders %}
+                                    {% if ordr.fuelStation == station %}
+                                        <li>{{ ordr.Customer }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            <ul class="details">
+                                <li class="topic">Total</li>
+
+                                {% for ordr in latestOrders %}
+                                    {% if ordr.fuelStation == station %}
+                                        <li>{{ ordr.totalCost }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="button">
+                            <a href="/app/FuelStation/TotalOrders/{{ station.id }}/">See All</a>
                         </div>
                     </div>
-                    <i class='bx bx-cart cart three'></i>
-                </div> -->
-                <!-- <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Return</div>
-                        <div class="number">11,086</div>
-                        <div class="indicator">
-                            <i class='bx bx-down-arrow-alt down'></i>
-                            <span class="text">Down From Today</span>
-                        </div>
-                    </div>
-                    <i class='bx bxs-cart-download cart four'></i>
-                </div> -->
-            </div>
-
-            <div class="sales-boxes">
-                <div class="recent-sales box">
-                    <div class="title">Recent Sales</div>
-                    <div class="sales-details">
-                        <ul class="details">
-                            <li class="topic">Date</li>
-
-                            {% for ordr in orderList %}
-                                {% if ordr.fuelStation == station %}
-                                    <li><a href="#">{{ ordr.orderDate }}</a></li>
-                                {% endif %}
-                            {% endfor %}
-                            
-                            <!-- <li><a href="#">02 Jan 2023</a></li>
-                            <li><a href="#">02 Jan 2023</a></li>
-                            <li><a href="#">02 Jan 2023</a></li>
-                            <li><a href="#">02 Jan 2023</a></li> -->
-                          
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Customer</li>
-
-                            {% for ordr in orderList %}
-                                {% if ordr.fuelStation == station %}
-                                    <li><a href="#">{{ ordr.Customer.firstName }}</a></li>
-                                {% endif %}
-                            {% endfor %}
-
-                            <!-- <li><a href="#">Hamza</a></li>
-                            <li><a href="#">Uzair</a></li>
-                            <li><a href="#">Ali</a></li>
-                            <li><a href="#">Zeeshan</a></li> -->
-                          
-                        </ul>
-                        <!-- <ul class="details">
-                            <li class="topic">Sales</li>
-                            <li><a href="#">Delivered</a></li>
-                            <li><a href="#">Pending</a></li>
-                            <li><a href="#">Delivered</a></li>
-                            <li><a href="#">Delivered</a></li>
-                          
-                        </ul> -->
-                        <ul class="details">
-                            <li class="topic">Total</li>
-
-                            {% for ordr in orderList %}
-                                {% if ordr.fuelStation == station %}
-                                    <li><a href="#">{{ ordr.totalCost }}</a></li>
-                                {% endif %}
-                            {% endfor %}
-
-                            <!-- <li><a href="#">PKR2498</a></li>
-                            <li><a href="#">PKR2450</a></li>
-                            <li><a href="#">PKR2500</a></li>
-                            <li><a href="#">PKR1700</a></li> -->
-                          
+                    <div class="top-sales box">
+                        <div class="title">Top Seling Product</div>
+                        <ul class="top-sales-details">
+                            <li>
+                                <a href="#">
+                                    <!--<img src="images/sunglasses.jpg" alt="">-->
+                                    <span class="product">Havoline Lubricant Oil</span>
+                                </a>
+                                <span class="price">PKR1107</span>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!--<img src="images/jeans.jpg" alt="">-->
+                                    <span class="product">Shell Oil </span>
+                                </a>
+                                <span class="price">PKR1567</span>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- <img src="images/nike.jpg" alt="">-->
+                                    <span class="product">Delo Fuel Oil</span>
+                                </a>
+                                <span class="price">PKR1234</span>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!--<img src="images/scarves.jpg" alt="">-->
+                                    <span class="product">ZIC Oil.</span>
+                                </a>
+                                <span class="price">PKR2312</span>
+                            </li>
+                            <li>
+                                
                         </ul>
                     </div>
-                    <div class="button">
-                        <a href="#">See All</a>
-                    </div>
-                </div>
-                <div class="top-sales box">
-                    <div class="title">Top Seling Product</div>
-                    <ul class="top-sales-details">
-                        <li>
-                            <a href="#">
-                                <!--<img src="images/sunglasses.jpg" alt="">-->
-                                <span class="product">Havoline Lubricant Oil</span>
-                            </a>
-                            <span class="price">PKR1107</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <!--<img src="images/jeans.jpg" alt="">-->
-                                <span class="product">Shell Oil </span>
-                            </a>
-                            <span class="price">PKR1567</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <!-- <img src="images/nike.jpg" alt="">-->
-                                <span class="product">Delo Fuel Oil</span>
-                            </a>
-                            <span class="price">PKR1234</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <!--<img src="images/scarves.jpg" alt="">-->
-                                <span class="product">ZIC Oil.</span>
-                            </a>
-                            <span class="price">PKR2312</span>
-                        </li>
-                        <li>
-                            
-                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <script>
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
-        sidebarBtn.onclick = function () {
-            sidebar.classList.toggle("active");
-            if (sidebar.classList.contains("active")) {
-                sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-            } else
-                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-        }
-    </script>
+        <script>
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".sidebarBtn");
+            sidebarBtn.onclick = function () {
+                sidebar.classList.toggle("active");
+                if (sidebar.classList.contains("active")) {
+                    sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+                } else
+                    sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+            }
+        </script>
 
-</body>
-
+    </body>
 </html>

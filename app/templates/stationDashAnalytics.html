@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .DashnavBar {
+            background-color: #e05260;
+        }
+
+        .analytics-box-topic {
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .no-underline {
+            text-decoration: none;
+            color: black;
+        }
+
+        .chartFrame {
+            justify-content: center;
+            display: flex;
+            /* height: fit-content;
+            width: 800px; */
+        }
+
+        .myChart {
+            /* height: 800px; */
+            /* width: 600px; */
+            background-color: #cecece;
+        }
+
+        #myChart {
+            height: 600px;
+            width: 250px;
+            background-color: #cecece;
+            /* border: 1px solid black; */
+            /* border-radius: 100px; */
+        }
+        #myChart2 {
+            width: 800px;
+            background-color: #98eafa;
+            border: 2px solid black;
+            margin-right: 25px;
+            border-radius: 20px;
+            /* padding-bottom: 15px; */
+            /* padding-left: 15px; */
+            padding: 15px;
+        }
+        
+        #myChart3 {
+            width: 1000px;
+            height: fit-content;
+            background-color: #98eafa;
+            border: 2px solid black;
+            margin-right: 25px;
+            border-radius: 20px;
+            /* padding-bottom: 15px; */
+            /* padding-left: 15px; */
+            padding: 15px;
+        }
+    </style>
+
+    <!-- ChartJS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs@0.3.24/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+    <body>
+        <div class="sidebar">
+            <div class="logo-details">
+                <i class='bx bxl-c-plus-plus'></i>
+                <span class="logo_name">One Planet Fuel Station</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/app/FuelStation/{{ station.id }}/">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/AddProducts/{{ station.id }}/">
+                        <i class='bx bx-box'></i>
+                        <span class="links_name">Product</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/FuelStation/Analytics/{{ station.id }}/" class="active">
+                        <i class='bx bx-pie-chart-alt-2'></i>
+                        <span class="links_name">Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/FuelStation/TotalOrders/{{ station.id }}/">
+                        <i class='bx bx-book-alt'></i>
+                        <span class="links_name">Total order</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/Post-A-Job/{{ station.id }}/">
+                        <i class='bx bx-folder-plus'></i>
+                        <span class="links_name">Post Jobs</span>
+                    </a>
+                </li>
+                <li class="log_out">
+                    <a href="/app/LogIn/">
+                        <i class='bx bx-log-out'></i>
+                        <span class="links_name">Log out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <section class="home-section">
+            <nav>
+                <div class="sidebar-button">
+                    <i class='bx bx-menu sidebarBtn'></i>
+                    <a class="no-underline" href="/app/FuelStation/{{ station.id }}/">
+                        <span class="dashboard">Dashboard</span>
+                    </a>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Search...">
+                    <i class='bx bx-search'></i>
+                </div>
+                <div class="profile-details">
+                    <span class="admin_name">Admin@{{ station.name }}</span>
+                </div>
+            </nav>
+
+            <div class="home-content">
+                <div>
+                    <div class="analytics box">
+                        <div class="analytics-box-topic">
+                            Analytics
+                        </div>
+
+                        <br>
+
+                        <div class="chartFrame">
+                            <div class="myChart">
+                                <canvas id="myChart2" aria-label="Hello ARIA World" role="img"></canvas>
+                            </div>
+
+                            <div class="myChart">
+                                <canvas id="myChart" aria-label="Hello ARIA World" role="img"></canvas>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="chartFrame">
+                            <div class="myChart">
+                                <canvas id="myChart3" aria-label="Hello ARIA World" role="img"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        const ctx = document.getElementById('myChart').getContext('2d');
+                        const ctx2 = document.getElementById('myChart2').getContext('2d');
+                        const ctx3 = document.getElementById('myChart3').getContext('2d');
+
+                        new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: [
+                                    {% for customer in customer_list %} '{{ customer }}', {% endfor %}
+                                ],
+                                datasets: [{
+                                    data: [
+                                        {% for cost in totalCost_list %} '{{ cost }}', {% endfor %}
+                                    ],
+                                    borderWidth: 0,
+                                    // backgroundColor: [
+                                    //     '#ec3131',
+                                    //     '#3131ec',
+                                    //     '#e6ec31',
+                                    //     '#44ec31',
+                                    //     '#a731ec',
+                                    //     '#ec8531'
+                                    // ]
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                },
+                                
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Last 10 sales comparison'
+                                    },
+                                    legend: {
+                                        labels: {
+                                            usePointStyle: true
+                                        },
+                                    }
+                                }
+                            }
+                        });
+
+                        new Chart(ctx2, {
+                            type: 'line',
+                            data: {
+                                labels: [
+                                    {% for ordr in orders_by_date %} '{{ ordr.orderDate }}', {% endfor %}
+                                ],
+                                datasets: [{
+                                    label: 'Sales in Rs against Date',
+                                    data: [
+                                        {% for ordr in orders_by_date %} '{{ ordr.total_cost }}', {% endfor %}
+                                    ],
+                                    borderWidth: 2,
+                                    backgroundColor: ['#ec3131']
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                },
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Daily Sales data (Last 30 days)'
+                                    },
+                                    legend: {
+                                        labels: {
+                                            usePointStyle: true
+                                        },
+                                    }
+                                }
+                            }
+                        });
+
+                        new Chart(ctx3, {
+                            type: 'bar',
+                            data: {
+                                labels: [
+                                    {% for customer in customer_list %} '{{ customer }}', {% endfor %}
+                                ],
+                                datasets: [{
+                                    label: 'Recent Sales by Customers',
+                                    data: [
+                                        {% for cost in totalCost_list %} '{{ cost }}', {% endfor %}
+                                    ],
+                                    borderWidth: 2,
+                                    backgroundColor: ['rgb(231, 120, 144)']
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                },
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: "{{ station.name }}'s Recent Sales"
+                                    },
+                                    legend: {
+                                        labels: {
+                                            usePointStyle: true
+                                        },
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+
+                <br>
+            </div>
+        </section>
+
+        <script>
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".sidebarBtn");
+            sidebarBtn.onclick = function () {
+                sidebar.classList.toggle("active");
+                if (sidebar.classList.contains("active")) {
+                    sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+                } else
+                    sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+            }
+        </script>
+    </body>
+</html>

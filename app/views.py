@@ -12,6 +12,8 @@ from app.models import applicant
 from app.models import myAdmin
 from app.models import order
 from django.db import connection
+from django.db.models.functions import TruncDate
+from django.db.models import Sum
 
 import smtplib, ssl
 import random
@@ -93,6 +95,8 @@ def site(request):
     station_list = fuelStations.objects.all()
     review_list = reviews.objects.all()
 
+    cart_product.clear()
+
     context = {
         'product_list': product_list,
         'station_list': station_list,
@@ -127,18 +131,129 @@ def fuelStation_view(request, station_id):
             sales += ordr.totalCost
             orderNum = orderNum + 1
 
+    latestOrders = order.objects.filter(fuelStation=station).order_by('-id')[:10]
+
+    print("type(latestOrders): ", type(latestOrders))
+    print("latestOrders: ", latestOrders)
+    fields_list = latestOrders.values('Customer', 'totalCost')
+
+    # Print the list of fields
+    print(list(fields_list))
+
+    # Divide the fields_list into two separate lists
+    customer_list = []
+    totalCost_list = []
+
+    for entry in fields_list:
+        cstmr = users.objects.get(pk=entry['Customer'])
+
+        customer_list.append(cstmr.firstName+cstmr.LastName)
+        totalCost_list.append(entry['totalCost'])
+
+    # Print the separate lists
+    print(customer_list)
+    print(totalCost_list)
+
     context = {
         'station_id': station_id,
         'station': station,
         'orderList': orderList,
         'orderNum': orderNum,
+        'latestOrders': latestOrders,
         'sales': sales,
+        'customer_list': customer_list,
+        'totalCost_list': totalCost_list,
     }
     print("==========================")
     print("fIdx: ", fIdx)
     print("==========================")
 
     return render(request, 'dashboard.html', context)
+
+def fuelStationAnalytics_view(request, station_id):
+    
+    station = fuelStations.objects.get(pk=station_id)
+    orderList = order.objects.all()
+
+    orderNum = 0
+
+    sales = 0
+
+    for ordr in orderList:
+        if ordr.fuelStation == station:
+            sales += ordr.totalCost
+            orderNum = orderNum + 1
+
+    latestOrders = order.objects.filter(fuelStation=station).order_by('-id')
+
+    print("type(latestOrders): ", type(latestOrders))
+    print("latestOrders: ", latestOrders)
+    fields_list = latestOrders.values('Customer', 'totalCost')
+
+    # Print the list of fields
+    print(list(fields_list))
+
+    # Divide the fields_list into two separate lists
+    customer_list = []
+    totalCost_list = []
+
+    for entry in fields_list:
+        cstmr = users.objects.get(pk=entry['Customer'])
+
+        customer_list.append(cstmr.firstName+cstmr.LastName)
+        totalCost_list.append(entry['totalCost'])
+
+    # Print the separate lists
+    print(customer_list)
+    print(totalCost_list)
+
+    orders_by_date = order.objects.filter(fuelStation=station).annotate(date=TruncDate('orderDate')).values('orderDate').annotate(total_cost=Sum('totalCost')).order_by('orderDate')[:30]
+
+    print("orders_by_date: ", orders_by_date)
+    for ordr in orders_by_date:
+        print(ordr['orderDate'], ordr['total_cost'])
+
+    context = {
+        'station_id': station_id,
+        'station': station,
+        'orderList': orderList,
+        'orderNum': orderNum,
+        'sales': sales,
+        'customer_list': customer_list,
+        'totalCost_list': totalCost_list,
+        'orders_by_date': orders_by_date,
+    }
+    print("==========================")
+    print("fIdx: ", fIdx)
+    print("==========================")
+
+    return render(request, 'stationDashAnalytics.html', context)
+
+def fuelStationOrders_view(request, station_id):
+    
+    station = fuelStations.objects.get(pk=station_id)
+    orderList = order.objects.all()
+
+    latestOrders = order.objects.filter(fuelStation=station).order_by('-id')[:10]
+
+    print("type(latestOrders): ", type(latestOrders))
+    print("latestOrders: ", latestOrders)
+    fields_list = latestOrders.values('Customer', 'totalCost')
+
+    # Print the list of fields
+    print(list(fields_list))
+
+
+    context = {
+        'station_id': station_id,
+        'station': station,
+        'orderList': orderList
+    }
+    print("==========================")
+    print("fIdx: ", fIdx)
+    print("==========================")
+
+    return render(request, 'stationDashOrdersList.html', context)
 
 def fuelStationList_view(request):
     station_list = fuelStations.objects.all()
@@ -760,6 +875,9 @@ def CheckOut_view(request, station_id, amount):
         newOrder.totalCost = amount
         newOrder.Customer = shopUser
         newOrder.fuelStation = station
+
+        for pr in cart_product:
+            newOrder.productList.add(pr.id)
 
         newOrder.save()
 
@@ -1719,6 +1837,9 @@ def AdminSiteAction(request, table_name, action, data_id):
             
             if table_name == "myadmin":
                 myAdmin.objects.filter(id=data_id).delete()
+            
+            if table_name == "order":
+                order.objects.filter(id=data_id).delete()
         
         return AdminSiteDetails(request, table_name)
 

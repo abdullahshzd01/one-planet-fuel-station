@@ -10,7 +10,7 @@
 .sidebar {
     position: fixed;
     height: 100%;
-    width: 240px;
+    width: 220px;
     background:#0A2558;
     transition: all 0.5s ease;
 }
@@ -90,8 +90,8 @@
     position: relative;
     background: #f5f5f5;
     min-height: 100vh;
-    width: calc(100% - 240px);
-    left: 240px;
+    width: calc(100% - 220px);
+    left: 220px;
     transition: all 0.5s ease;
 }
 
@@ -108,8 +108,8 @@
     display: flex;
     align-items: center;
     position: fixed;
-    width: calc(100% - 240px);
-    left: 240px;
+    width: calc(100% - 220px);
+    left: 220px;
     z-index: 100;
     padding: 0 20px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -201,7 +201,7 @@ nav .profile-details i {
 
 .home-section .home-content {
     position: relative;
-    padding-top: 104px;
+    padding-top: 110px;
 }
 
 .home-content .overview-boxes {
@@ -304,10 +304,21 @@ nav .profile-details i {
 .home-content .sales-boxes .recent-sales {
     width: 65%;
     background: #fff;
+    /* background-color: rgb(231, 120, 144); */
     padding: 20px 30px;
     margin: 0 20px;
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.home-content .analytics {
+    width: 98%;
+    background: #cecece;
+    /* background: #fff; */
+    padding: 20px 30px;
+    margin: 0 10px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0.5, 0.5, 0.5, 0.5);
 }
 
 .home-content .sales-boxes .sales-details {
@@ -333,6 +344,13 @@ nav .profile-details i {
 }
 
 .sales-boxes .sales-details li a {
+    font-size: 18px;
+    color: #333;
+    font-size: 400;
+    text-decoration: none;
+}
+
+.analytics li a {
     font-size: 18px;
     color: #333;
     font-size: 400;
