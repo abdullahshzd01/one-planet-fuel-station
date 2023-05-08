@@ -1,0 +1,86 @@
+api = /products/?page_size=10&page=1
+api = /products/?page_size=10
+api = /products/?page=1
+api = /products/?title=test
+api = /products/?stationID=2
+api = /products/?page_size=10&page=1&title=test&stationID=2
+here
+page_size is number of products per page
+page is page number
+title is product title
+stationID is fuel_station id
+`` if you want all products by fuelstation add statioID otherwise dont add stationID``
+`` if you want all products which contains that title add title otherwise dont add title``
+type = GET
+_________________________________________________________________________
+
+
+api = /productDetail/2/
+here 2 is product id
+type = GET
+```
+
+_________________________________________________________________________
+
+api = /jobs/
+api = /jobs/?page_size=10&page=1
+api = /jobs/?page_size=10
+api = /jobs/?page=1
+api = /jobs/?title=job_name
+api = /jobs/?stationID=2
+api = /jobs/?page_size=10&page=1&title=test&stationID=2
+here
+page_size is number of jobs per page
+page is page number
+title is job title
+stationID is fuel_station id
+`` if you want all jobs by fuelstation add statioID otherwise dont add stationID``
+`` if you want all jobs which contains that title add title otherwise dont add title``
+type = GET
+
+
+_________________________________________________________________________
+
+
+api = /jobDetail/2/
+here 2 is job id
+type = GET
+```
+
+_________________________________________________________________________
+
+
+api = /jobApply/
+type = POST
+here you have to send
+{
+    "job" = (job ID)
+    "user" = (user email)
+    "cv" = (cv image file)
+
+}
+
+_________________________________________________________________________
+
+
+api = /fuelstations/
+api = /fuelstations/?page_size=10&page=1
+api = /fuelstations/?page_size=10
+api = /fuelstations/?page=1
+api = /fuelstations/?name=test
+type = GET
+here
+page_size is number of fuelstations per page
+page is page number
+name is fuelstation name
+`` if you want all fuelstations which contains that name add name otherwise dont add name``
+
+
+_________________________________________________________________________
+
+api = /fuelstationDetail/2/
+here 2 is fuelstation id
+type = GET
+```
+
+_________________________________________________________________________
