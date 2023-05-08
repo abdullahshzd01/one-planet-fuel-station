@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 # from .models import fuelStations
 # from app import models
-from app.models import fuelStations
+from app.models import fuelStations, unregisteredOrders
 from app.models import products
 from app.models import jobs
 from app.models import reviews
@@ -61,6 +61,7 @@ fIdx = 0
 # database=firebase.database()
 
 # some useful functions
+
 def getFuelStationName(fs_id):
     try:
         entity = fuelStations.objects.get(id=fs_id)
@@ -1084,6 +1085,7 @@ def AdminSiteDetails(request, table_name):
     applicant_list = applicant.objects.all()
     myAdmin_list = myAdmin.objects.all()
     order_list = order.objects.all()
+    unregisteredorders_list = unregisteredOrders.objects.all()
 
     # data = table_name.objects.all()
 
@@ -1387,6 +1389,37 @@ def AdminSiteAction(request, table_name, action, data_id):
 
         print("field_names: ", field_names)
 
+    if table_name == "unregisteredorders":
+        context['table_data'] = unregisteredorders_list
+        print("unregisteredorders_list: ", unregisteredorders_list)
+
+        if data_id > 0:
+            entity = unregisteredOrders.objects.get(pk=data_id)
+
+        print('len(unregisteredOrders._meta.get_fields()): ', len(unregisteredOrders._meta.get_fields()))
+
+        # fields = unregisteredOrders._meta.get_fields(concrete=True)
+        fields = [field for field in unregisteredOrders._meta.fields]
+
+        field_names = [field.name for field in fields]
+
+        for n in field_names:
+            print("type(n): ", type(n))
+
+        print("type(field_names): ", type(field_names))
+
+        field_names = [x for x in field_names if x != "orderDate"]
+
+        field_names.pop(0)
+
+        context['field_names'] = field_names
+
+        print("field_names: ", field_names)
+
+
+
+
+
     
 
     if request.method == 'POST':
@@ -1518,6 +1551,23 @@ def AdminSiteAction(request, table_name, action, data_id):
                     db_add.save()
 
                     print("Admin add job sucessfull")
+            if table_name == "unregisteredOrders":
+                serviceType = request.POST['serviceType']
+                totalCost = request.POST['totalCost']
+                customer = request.POST['Customer']
+                station = request.POST['station']
+
+                query = True
+                customer = users.objects.get(firstName=customer)
+                if query:
+                    db_add = unregisteredOrders()
+
+                    db_add.serviceType = serviceType
+                    db_add.totalCost = totalCost
+                    db_add.Customer = customer
+                    db_add.station = station
+                    db_add.save()
+
 
             if table_name == "users":
                 firstName = request.POST['firstName']

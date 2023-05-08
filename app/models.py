@@ -1,4 +1,6 @@
 from django.db import models
+
+
 # from django.contrib.auth.models import User
 # from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
@@ -35,7 +37,8 @@ class fuelStations(models.Model):
     # objects = StationManager()
 
     def __str__(self):
-        return self.name
+        return str(self.id) + " " + self.name
+
 
 class products(models.Model):
     # prdct_id = models.IntegerField(auto_created=0)
@@ -48,7 +51,8 @@ class products(models.Model):
     fuelStation = models.ForeignKey(fuelStations, blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return str(self.id) + " -- " + self.title
+
 
 class users(models.Model):
     firstName = models.CharField(max_length=50)
@@ -60,6 +64,7 @@ class users(models.Model):
         # return self.email
         return self.firstName + ' ' + self.LastName
 
+
 class cart(models.Model):
     # cart_id = models.CharField(max_length=6)
     user = models.ForeignKey(users, blank=True, on_delete=models.CASCADE)
@@ -68,6 +73,7 @@ class cart(models.Model):
     def __str__(self):
         # return self.id
         return self.user.firstName + ' ' + self.user.LastName
+
 
 class jobs(models.Model):
     job_name = models.CharField(max_length=150, null=True, blank=True)
@@ -81,6 +87,7 @@ class jobs(models.Model):
     def __str__(self):
         return self.job_name
 
+
 class applicant(models.Model):
     job = models.ForeignKey(jobs, blank=True, null=True, on_delete=models.CASCADE)
     user = models.ForeignKey(users, blank=True, on_delete=models.CASCADE)
@@ -88,6 +95,7 @@ class applicant(models.Model):
 
     def __str__(self):
         return self.user.firstName + ' ' + self.user.LastName + ' : ' + self.job.job_name + " Application"
+
 
 class reviews(models.Model):
     user = models.ForeignKey(users, blank=True, null=True, on_delete=models.CASCADE)
@@ -97,6 +105,7 @@ class reviews(models.Model):
     def __str__(self):
         return self.user.firstName + ' ' + self.user.LastName
 
+
 class myAdmin(models.Model):
     email = models.EmailField(blank=True, unique=True)
     password = models.CharField(max_length=15)
@@ -104,9 +113,10 @@ class myAdmin(models.Model):
     def __str__(self):
         return self.email
 
+
 class order(models.Model):
     totalCost = models.FloatField()
-    productList = models.ManyToManyField(products)
+    products = models.ManyToManyField(products, blank=True)
     Customer = models.ForeignKey(users, blank=True, null=True, on_delete=models.CASCADE)
     orderDate = models.DateField(auto_now_add=True)
     fuelStation = models.ForeignKey(fuelStations, blank=True, null=True, on_delete=models.CASCADE)
@@ -115,3 +125,27 @@ class order(models.Model):
         # return str(self.id)
         # return self.orderDate
         return self.orderDate
+
+    def __str__(self):
+        return self.Customer.firstName + ' ' + self.Customer.LastName + ' : ' + str(self.orderDate)
+
+
+class unregisteredOrders(models.Model):
+    serviceType = models.CharField(max_length=50)
+    totalCost = models.FloatField()
+    Customer = models.ForeignKey(users, blank=True, null=True, on_delete=models.CASCADE)
+    orderDate = models.DateField(auto_now_add=True)
+    station = models.TextField(default="No station")
+    description = models.TextField(default="No description")
+
+    def __str__(self):
+        return self.serviceType + ' : ' + self.Customer.firstName + ' ' + self.Customer.LastName
+
+
+class ProductRatings(models.Model):
+    product = models.ForeignKey(products, blank=True, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(users, blank=True, null=True, on_delete=models.CASCADE)
+    rating = models.FloatField()
+
+    def __str__(self):
+        return self.product.title + ' : ' + self.user.firstName
