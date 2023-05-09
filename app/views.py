@@ -879,12 +879,12 @@ def CheckOut_view(request, station_id, amount):
 
         newOrder.save()
 
-        nOrdr = order.objects.get(pk=newOrder.id)
+        # nOrdr = order.objects.get(pk=newOrder.id)
 
-        print("newOrder id: ", nOrdr.id)
+        # print("newOrder id: ", nOrdr.id)
 
-        for pr in cart_product:
-            nOrdr.productList.add(pr)
+        # for pr in cart_product:
+        #     nOrdr.products.add(pr)
 
         cart_product.clear()
 
