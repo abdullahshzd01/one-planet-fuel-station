@@ -22,5 +22,6 @@ urlpatterns = [
         path('placeOrder/', OrderCreate.as_view(), name="placeOrder"),
         path('placeUnregisteredOrder/', UnregisteredOrderCreate.as_view(), name="placeOrder"),
         path('rateProduct/', ProductRatingCreateUpdate.as_view(), name="rateProduct"),
+        path('favProducts/', FavProductsView.as_view(), name="FavoriteProducts"),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

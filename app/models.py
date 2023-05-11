@@ -149,3 +149,11 @@ class ProductRatings(models.Model):
 
     def __str__(self):
         return self.product.title + ' : ' + self.user.firstName
+
+
+class ProductFavs(models.Model):
+    product = models.ForeignKey(products, blank=True, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(users, blank=True, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.product.title + ' : ' + self.user.firstName

@@ -47,3 +47,13 @@ class ProductRatingSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "user": {"required": False, "allow_null": True},
         }
+
+
+class FavProductSerializer(serializers.ModelSerializer):
+    product = productsSerializer(read_only=True)
+    class Meta:
+        model = ProductFavs
+        fields = "__all__"
+        extra_kwargs = {
+            "user": {"required": False, "allow_null": True},
+        }
