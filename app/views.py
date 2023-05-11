@@ -877,10 +877,14 @@ def CheckOut_view(request, station_id, amount):
         newOrder.Customer = shopUser
         newOrder.fuelStation = station
 
-        for pr in cart_product:
-            newOrder.productList.add(pr.id)
-
         newOrder.save()
+
+        # nOrdr = order.objects.get(pk=newOrder.id)
+
+        # print("newOrder id: ", nOrdr.id)
+
+        # for pr in cart_product:
+        #     nOrdr.products.add(pr)
 
         cart_product.clear()
 
