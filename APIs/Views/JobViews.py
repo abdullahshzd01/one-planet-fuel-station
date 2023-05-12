@@ -79,3 +79,19 @@ class ApplicationCreate(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
+
+
+
+class getAllApplicationsForUser(generics.ListAPIView):
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+    queryset = applicant.objects.all()
+    serializer_class = JobApplicationSerializer
+
+    def get_queryset(self):
+        queryset = applicant.objects.all()
+        email = self.request.query_params.get('email', None)
+        if email is not None:
+            user = users.objects.get(email=email)
+            queryset = queryset.filter(Q(user__id=user.id))
+        return queryset

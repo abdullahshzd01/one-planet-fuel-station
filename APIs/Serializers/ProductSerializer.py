@@ -12,6 +12,7 @@ class productsSerializer(serializers.ModelSerializer):
     def get_rating(self, obj):
 
         ratings = ProductRatings.objects.filter(product=obj)
+        print("------------------------------------------------",ratings)
         if ratings.count() == 0:
             return {
                 "rating": 3.5,
