@@ -1393,7 +1393,7 @@ def AdminSiteAction(request, table_name, action, data_id):
 
         print("field_names: ", field_names)
 
-    if table_name == "unregisteredorders":
+    if table_name == "unregisteredOrders":
         context['table_data'] = unregisteredorders_list
         print("unregisteredorders_list: ", unregisteredorders_list)
 
@@ -1419,12 +1419,6 @@ def AdminSiteAction(request, table_name, action, data_id):
         context['field_names'] = field_names
 
         print("field_names: ", field_names)
-
-
-
-
-
-    
 
     if request.method == 'POST':
         if action == "add":
@@ -1555,6 +1549,7 @@ def AdminSiteAction(request, table_name, action, data_id):
                     db_add.save()
 
                     print("Admin add job sucessfull")
+
             if table_name == "unregisteredOrders":
                 serviceType = request.POST['serviceType']
                 totalCost = request.POST['totalCost']
@@ -1571,7 +1566,6 @@ def AdminSiteAction(request, table_name, action, data_id):
                     db_add.Customer = customer
                     db_add.station = station
                     db_add.save()
-
 
             if table_name == "users":
                 firstName = request.POST['firstName']
@@ -1848,10 +1842,14 @@ def AdminSiteAction(request, table_name, action, data_id):
 
                 print("Admin update Reviews sucessfull")
 
-            if table_name == "orders":
+            if table_name == "order":
                 totalCost = request.POST['totalCost']
                 Customer = request.POST['Customer']
                 fuelStation = request.POST['fuelStation']
+
+                print("totalCost: ", totalCost)
+                print("Customer: ", Customer)
+                print("fuelStation: ", fuelStation)
 
                 first_name, last_name = Customer.split(' ')
 
@@ -1861,7 +1859,7 @@ def AdminSiteAction(request, table_name, action, data_id):
                 ordr.Customer = users.objects.get(firstName=first_name, LastName=last_name)
                 ordr.fuelStation = fuelStations.objects.get(name=fuelStation)
                 
-                station.save()
+                ordr.save()
 
                 print("Admin update Order sucessfull")
 
@@ -1899,6 +1897,14 @@ def AdminSiteAction(request, table_name, action, data_id):
 
 
     if data_id > 0:
+        print()
+        print("++++++++++++++++++++++++")
+        print("type(entity): ", type(entity))
+        print("entity: ", entity)
+        # print("entity.products: ", entity.products)
+        print("++++++++++++++++++++++++")
+        print()
+
         entity = model_to_dict(entity)
         
         context['entity'] = entity

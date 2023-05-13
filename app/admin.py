@@ -8,6 +8,7 @@ from .models import reviews
 from .models import applicant
 from .models import myAdmin
 from .models import order
+from .models import unregisteredOrders
 
 # Register your models here.
 admin.site.register(fuelStations)
@@ -19,3 +20,4 @@ admin.site.register(reviews)
 admin.site.register(applicant)
 admin.site.register(myAdmin)
 admin.site.register(order)
+admin.site.register(unregisteredOrders)
